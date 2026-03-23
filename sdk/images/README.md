@@ -1,6 +1,6 @@
 # @rixl/sdk-typescript-images@2.0
 
-A TypeScript SDK client for the api.rixl.com API.
+A TypeScript SDK client for the localhost API.
 
 ## Usage
 
@@ -18,7 +18,7 @@ import {
   Configuration,
   ImagesApi,
 } from '@rixl/sdk-typescript-images';
-import type { DeleteImagesImageIdRequest } from '@rixl/sdk-typescript-images';
+import type { ImagesGetRequest } from '@rixl/sdk-typescript-images';
 
 async function example() {
   console.log("🚀 Testing @rixl/sdk-typescript-images SDK...");
@@ -29,12 +29,18 @@ async function example() {
   const api = new ImagesApi(config);
 
   const body = {
-    // string | Image ID
-    imageId: imageId_example,
-  } satisfies DeleteImagesImageIdRequest;
+    // number | Maximum number of items to return in a single request. <br> **Default:** `25` (optional)
+    limit: 25,
+    // number | Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0` (optional)
+    offset: 0,
+    // string | Field to sort by (created_at, name, size, updated_at) (optional)
+    sort: created_at,
+    // string | Sort order (asc, desc) (optional)
+    order: desc,
+  } satisfies ImagesGetRequest;
 
   try {
-    const data = await api.deleteImagesImageId(body);
+    const data = await api.imagesGet(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -50,15 +56,15 @@ example().catch(console.error);
 
 ### API Endpoints
 
-All URIs are relative to *https://api.rixl.com*
+All URIs are relative to *http://localhost*
 
 | Class | Method | HTTP request | Description
 | ----- | ------ | ------------ | -------------
-*ImagesApi* | [**deleteImagesImageId**](docs/ImagesApi.md#deleteimagesimageid) | **DELETE** /images/{imageId} | Delete image
-*ImagesApi* | [**getImages**](docs/ImagesApi.md#getimages) | **GET** /images | List images for a project
-*ImagesApi* | [**getImagesImageId**](docs/ImagesApi.md#getimagesimageid) | **GET** /images/{imageId} | Get image
-*ImagesApi* | [**postImagesUploadComplete**](docs/ImagesApi.md#postimagesuploadcompleteoperation) | **POST** /images/upload/complete | Upload: Mark as complete
-*ImagesApi* | [**postImagesUploadInit**](docs/ImagesApi.md#postimagesuploadinitoperation) | **POST** /images/upload/init | Upload: Init
+*ImagesApi* | [**imagesGet**](docs/ImagesApi.md#imagesget) | **GET** /images | List images for a project
+*ImagesApi* | [**imagesImageIdDelete**](docs/ImagesApi.md#imagesimageiddelete) | **DELETE** /images/{imageId} | Delete image
+*ImagesApi* | [**imagesImageIdGet**](docs/ImagesApi.md#imagesimageidget) | **GET** /images/{imageId} | Get image
+*ImagesApi* | [**imagesUploadCompletePost**](docs/ImagesApi.md#imagesuploadcompletepostoperation) | **POST** /images/upload/complete | Upload: Mark as complete
+*ImagesApi* | [**imagesUploadInitPost**](docs/ImagesApi.md#imagesuploadinitpostoperation) | **POST** /images/upload/init | Upload: Init
 
 
 ### Models
@@ -66,14 +72,14 @@ All URIs are relative to *https://api.rixl.com*
 - [FileStatus](docs/FileStatus.md)
 - [GithubComQeeqezApiInternalErrorsErrorResponse](docs/GithubComQeeqezApiInternalErrorsErrorResponse.md)
 - [Image](docs/Image.md)
+- [ImagesUploadCompletePostRequest](docs/ImagesUploadCompletePostRequest.md)
+- [ImagesUploadInitPostRequest](docs/ImagesUploadInitPostRequest.md)
 - [InternalImagesHandlerCompleteRequest](docs/InternalImagesHandlerCompleteRequest.md)
 - [InternalImagesHandlerInitResponse](docs/InternalImagesHandlerInitResponse.md)
 - [InternalImagesHandlerUploadInitRequest](docs/InternalImagesHandlerUploadInitRequest.md)
 - [ModelFile](docs/ModelFile.md)
 - [PaginationPaginatedResponseImage](docs/PaginationPaginatedResponseImage.md)
 - [PaginationPagination](docs/PaginationPagination.md)
-- [PostImagesUploadCompleteRequest](docs/PostImagesUploadCompleteRequest.md)
-- [PostImagesUploadInitRequest](docs/PostImagesUploadInitRequest.md)
 
 ### Authorization
 
@@ -85,6 +91,13 @@ Authentication schemes defined for the API:
 
 - **Type**: API key
 - **API key parameter name**: `X-API-Key`
+- **Location**: HTTP header
+<a id="Bearer"></a>
+#### Bearer
+
+
+- **Type**: API key
+- **API key parameter name**: `Authorization`
 - **Location**: HTTP header
 
 ## About

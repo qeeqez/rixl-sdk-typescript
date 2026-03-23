@@ -1,6 +1,6 @@
 # @rixl/sdk-typescript-feeds@2.0
 
-A TypeScript SDK client for the api.rixl.com API.
+A TypeScript SDK client for the localhost API.
 
 ## Usage
 
@@ -18,7 +18,7 @@ import {
   Configuration,
   FeedsApi,
 } from '@rixl/sdk-typescript-feeds';
-import type { GetFeedsFeedIdRequest } from '@rixl/sdk-typescript-feeds';
+import type { FeedsFeedIdCreatorsCreatorIdGetRequest } from '@rixl/sdk-typescript-feeds';
 
 async function example() {
   console.log("🚀 Testing @rixl/sdk-typescript-feeds SDK...");
@@ -26,15 +26,17 @@ async function example() {
 
   const body = {
     // string | Feed ID
-    feedId: feedId_example,
+    feedId: F4edRI23XL,
+    // string | Creator ID
+    creatorId: C6rtRI23XL,
     // number | Maximum number of items to return in a single request. <br> **Default:** `25` (optional)
-    limit: 56,
+    limit: 25,
     // number | Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0` (optional)
-    offset: 56,
-  } satisfies GetFeedsFeedIdRequest;
+    offset: 0,
+  } satisfies FeedsFeedIdCreatorsCreatorIdGetRequest;
 
   try {
-    const data = await api.getFeedsFeedId(body);
+    const data = await api.feedsFeedIdCreatorsCreatorIdGet(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -50,13 +52,13 @@ example().catch(console.error);
 
 ### API Endpoints
 
-All URIs are relative to *https://api.rixl.com*
+All URIs are relative to *http://localhost*
 
 | Class | Method | HTTP request | Description
 | ----- | ------ | ------------ | -------------
-*FeedsApi* | [**getFeedsFeedId**](docs/FeedsApi.md#getfeedsfeedid) | **GET** /feeds/{feedId} | List posts in a feed
-*FeedsApi* | [**getFeedsFeedIdCreatorsCreatorId**](docs/FeedsApi.md#getfeedsfeedidcreatorscreatorid) | **GET** /feeds/{feedId}/creators/{creatorId} | List posts by creator
-*FeedsApi* | [**getFeedsFeedIdPostId**](docs/FeedsApi.md#getfeedsfeedidpostid) | **GET** /feeds/{feedId}/{postId} | Get a post
+*FeedsApi* | [**feedsFeedIdCreatorsCreatorIdGet**](docs/FeedsApi.md#feedsfeedidcreatorscreatoridget) | **GET** /feeds/{feedId}/creators/{creatorId} | List posts by creator
+*FeedsApi* | [**feedsFeedIdGet**](docs/FeedsApi.md#feedsfeedidget) | **GET** /feeds/{feedId} | List posts in a feed
+*FeedsApi* | [**feedsFeedIdPostIdGet**](docs/FeedsApi.md#feedsfeedidpostidget) | **GET** /feeds/{feedId}/{postId} | Get a post
 
 
 ### Models
@@ -83,6 +85,13 @@ Authentication schemes defined for the API:
 
 - **Type**: API key
 - **API key parameter name**: `X-API-Key`
+- **Location**: HTTP header
+<a id="Bearer"></a>
+#### Bearer
+
+
+- **Type**: API key
+- **API key parameter name**: `Authorization`
 - **Location**: HTTP header
 
 ## About

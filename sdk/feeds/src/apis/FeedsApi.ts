@@ -28,20 +28,20 @@ import {
     PostToJSON,
 } from '../models/index';
 
-export interface GetFeedsFeedIdRequest {
-    feedId: string;
-    limit?: number;
-    offset?: number;
-}
-
-export interface GetFeedsFeedIdCreatorsCreatorIdRequest {
+export interface FeedsFeedIdCreatorsCreatorIdGetRequest {
     feedId: string;
     creatorId: string;
     limit?: number;
     offset?: number;
 }
 
-export interface GetFeedsFeedIdPostIdRequest {
+export interface FeedsFeedIdGetRequest {
+    feedId: string;
+    limit?: number;
+    offset?: number;
+}
+
+export interface FeedsFeedIdPostIdGetRequest {
     feedId: string;
     postId: string;
 }
@@ -52,75 +52,20 @@ export interface GetFeedsFeedIdPostIdRequest {
 export class FeedsApi extends runtime.BaseAPI {
 
     /**
-     * Creates request options for getFeedsFeedId without sending the request
+     * Creates request options for feedsFeedIdCreatorsCreatorIdGet without sending the request
      */
-    async getFeedsFeedIdRequestOpts(requestParameters: GetFeedsFeedIdRequest): Promise<runtime.RequestOpts> {
+    async feedsFeedIdCreatorsCreatorIdGetRequestOpts(requestParameters: FeedsFeedIdCreatorsCreatorIdGetRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['feedId'] == null) {
             throw new runtime.RequiredError(
                 'feedId',
-                'Required parameter "feedId" was null or undefined when calling getFeedsFeedId().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        if (requestParameters['limit'] != null) {
-            queryParameters['limit'] = requestParameters['limit'];
-        }
-
-        if (requestParameters['offset'] != null) {
-            queryParameters['offset'] = requestParameters['offset'];
-        }
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-
-        let urlPath = `/feeds/{feedId}`;
-        urlPath = urlPath.replace(`{${"feedId"}}`, encodeURIComponent(String(requestParameters['feedId'])));
-
-        return {
-            path: urlPath,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Retrieve posts in a feed, with pagination.
-     * List posts in a feed
-     */
-    async getFeedsFeedIdRaw(requestParameters: GetFeedsFeedIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginationPaginatedResponsePost>> {
-        const requestOptions = await this.getFeedsFeedIdRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => PaginationPaginatedResponsePostFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve posts in a feed, with pagination.
-     * List posts in a feed
-     */
-    async getFeedsFeedId(requestParameters: GetFeedsFeedIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginationPaginatedResponsePost> {
-        const response = await this.getFeedsFeedIdRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for getFeedsFeedIdCreatorsCreatorId without sending the request
-     */
-    async getFeedsFeedIdCreatorsCreatorIdRequestOpts(requestParameters: GetFeedsFeedIdCreatorsCreatorIdRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['feedId'] == null) {
-            throw new runtime.RequiredError(
-                'feedId',
-                'Required parameter "feedId" was null or undefined when calling getFeedsFeedIdCreatorsCreatorId().'
+                'Required parameter "feedId" was null or undefined when calling feedsFeedIdCreatorsCreatorIdGet().'
             );
         }
 
         if (requestParameters['creatorId'] == null) {
             throw new runtime.RequiredError(
                 'creatorId',
-                'Required parameter "creatorId" was null or undefined when calling getFeedsFeedIdCreatorsCreatorId().'
+                'Required parameter "creatorId" was null or undefined when calling feedsFeedIdCreatorsCreatorIdGet().'
             );
         }
 
@@ -153,8 +98,8 @@ export class FeedsApi extends runtime.BaseAPI {
      * Retrieve posts in a feed by a specific creator, with pagination.
      * List posts by creator
      */
-    async getFeedsFeedIdCreatorsCreatorIdRaw(requestParameters: GetFeedsFeedIdCreatorsCreatorIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginationPaginatedResponsePost>> {
-        const requestOptions = await this.getFeedsFeedIdCreatorsCreatorIdRequestOpts(requestParameters);
+    async feedsFeedIdCreatorsCreatorIdGetRaw(requestParameters: FeedsFeedIdCreatorsCreatorIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginationPaginatedResponsePost>> {
+        const requestOptions = await this.feedsFeedIdCreatorsCreatorIdGetRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PaginationPaginatedResponsePostFromJSON(jsonValue));
@@ -164,26 +109,81 @@ export class FeedsApi extends runtime.BaseAPI {
      * Retrieve posts in a feed by a specific creator, with pagination.
      * List posts by creator
      */
-    async getFeedsFeedIdCreatorsCreatorId(requestParameters: GetFeedsFeedIdCreatorsCreatorIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginationPaginatedResponsePost> {
-        const response = await this.getFeedsFeedIdCreatorsCreatorIdRaw(requestParameters, initOverrides);
+    async feedsFeedIdCreatorsCreatorIdGet(requestParameters: FeedsFeedIdCreatorsCreatorIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginationPaginatedResponsePost> {
+        const response = await this.feedsFeedIdCreatorsCreatorIdGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for getFeedsFeedIdPostId without sending the request
+     * Creates request options for feedsFeedIdGet without sending the request
      */
-    async getFeedsFeedIdPostIdRequestOpts(requestParameters: GetFeedsFeedIdPostIdRequest): Promise<runtime.RequestOpts> {
+    async feedsFeedIdGetRequestOpts(requestParameters: FeedsFeedIdGetRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['feedId'] == null) {
             throw new runtime.RequiredError(
                 'feedId',
-                'Required parameter "feedId" was null or undefined when calling getFeedsFeedIdPostId().'
+                'Required parameter "feedId" was null or undefined when calling feedsFeedIdGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        if (requestParameters['limit'] != null) {
+            queryParameters['limit'] = requestParameters['limit'];
+        }
+
+        if (requestParameters['offset'] != null) {
+            queryParameters['offset'] = requestParameters['offset'];
+        }
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+
+        let urlPath = `/feeds/{feedId}`;
+        urlPath = urlPath.replace(`{${"feedId"}}`, encodeURIComponent(String(requestParameters['feedId'])));
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Retrieve posts in a feed, with pagination.
+     * List posts in a feed
+     */
+    async feedsFeedIdGetRaw(requestParameters: FeedsFeedIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginationPaginatedResponsePost>> {
+        const requestOptions = await this.feedsFeedIdGetRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PaginationPaginatedResponsePostFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve posts in a feed, with pagination.
+     * List posts in a feed
+     */
+    async feedsFeedIdGet(requestParameters: FeedsFeedIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginationPaginatedResponsePost> {
+        const response = await this.feedsFeedIdGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for feedsFeedIdPostIdGet without sending the request
+     */
+    async feedsFeedIdPostIdGetRequestOpts(requestParameters: FeedsFeedIdPostIdGetRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['feedId'] == null) {
+            throw new runtime.RequiredError(
+                'feedId',
+                'Required parameter "feedId" was null or undefined when calling feedsFeedIdPostIdGet().'
             );
         }
 
         if (requestParameters['postId'] == null) {
             throw new runtime.RequiredError(
                 'postId',
-                'Required parameter "postId" was null or undefined when calling getFeedsFeedIdPostId().'
+                'Required parameter "postId" was null or undefined when calling feedsFeedIdPostIdGet().'
             );
         }
 
@@ -208,8 +208,8 @@ export class FeedsApi extends runtime.BaseAPI {
      * Retrieve a post from feed by its ID
      * Get a post
      */
-    async getFeedsFeedIdPostIdRaw(requestParameters: GetFeedsFeedIdPostIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Post>> {
-        const requestOptions = await this.getFeedsFeedIdPostIdRequestOpts(requestParameters);
+    async feedsFeedIdPostIdGetRaw(requestParameters: FeedsFeedIdPostIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Post>> {
+        const requestOptions = await this.feedsFeedIdPostIdGetRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PostFromJSON(jsonValue));
@@ -219,8 +219,8 @@ export class FeedsApi extends runtime.BaseAPI {
      * Retrieve a post from feed by its ID
      * Get a post
      */
-    async getFeedsFeedIdPostId(requestParameters: GetFeedsFeedIdPostIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Post> {
-        const response = await this.getFeedsFeedIdPostIdRaw(requestParameters, initOverrides);
+    async feedsFeedIdPostIdGet(requestParameters: FeedsFeedIdPostIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Post> {
+        const response = await this.feedsFeedIdPostIdGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

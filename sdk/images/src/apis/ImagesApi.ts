@@ -17,47 +17,47 @@ import * as runtime from '../runtime';
 import type {
   GithubComQeeqezApiInternalErrorsErrorResponse,
   Image,
+  ImagesUploadCompletePostRequest,
+  ImagesUploadInitPostRequest,
   InternalImagesHandlerInitResponse,
   PaginationPaginatedResponseImage,
-  PostImagesUploadCompleteRequest,
-  PostImagesUploadInitRequest,
 } from '../models/index';
 import {
     GithubComQeeqezApiInternalErrorsErrorResponseFromJSON,
     GithubComQeeqezApiInternalErrorsErrorResponseToJSON,
     ImageFromJSON,
     ImageToJSON,
+    ImagesUploadCompletePostRequestFromJSON,
+    ImagesUploadCompletePostRequestToJSON,
+    ImagesUploadInitPostRequestFromJSON,
+    ImagesUploadInitPostRequestToJSON,
     InternalImagesHandlerInitResponseFromJSON,
     InternalImagesHandlerInitResponseToJSON,
     PaginationPaginatedResponseImageFromJSON,
     PaginationPaginatedResponseImageToJSON,
-    PostImagesUploadCompleteRequestFromJSON,
-    PostImagesUploadCompleteRequestToJSON,
-    PostImagesUploadInitRequestFromJSON,
-    PostImagesUploadInitRequestToJSON,
 } from '../models/index';
 
-export interface DeleteImagesImageIdRequest {
-    imageId: string;
-}
-
-export interface GetImagesRequest {
+export interface ImagesGetRequest {
     limit?: number;
     offset?: number;
     sort?: string;
     order?: string;
 }
 
-export interface GetImagesImageIdRequest {
+export interface ImagesImageIdDeleteRequest {
     imageId: string;
 }
 
-export interface PostImagesUploadCompleteOperationRequest {
-    postImagesUploadCompleteRequest: PostImagesUploadCompleteRequest;
+export interface ImagesImageIdGetRequest {
+    imageId: string;
 }
 
-export interface PostImagesUploadInitOperationRequest {
-    postImagesUploadInitRequest: PostImagesUploadInitRequest;
+export interface ImagesUploadCompletePostOperationRequest {
+    imagesUploadCompletePostRequest: ImagesUploadCompletePostRequest;
+}
+
+export interface ImagesUploadInitPostOperationRequest {
+    imagesUploadInitPostRequest: ImagesUploadInitPostRequest;
 }
 
 /**
@@ -66,59 +66,9 @@ export interface PostImagesUploadInitOperationRequest {
 export class ImagesApi extends runtime.BaseAPI {
 
     /**
-     * Creates request options for deleteImagesImageId without sending the request
+     * Creates request options for imagesGet without sending the request
      */
-    async deleteImagesImageIdRequestOpts(requestParameters: DeleteImagesImageIdRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['imageId'] == null) {
-            throw new runtime.RequiredError(
-                'imageId',
-                'Required parameter "imageId" was null or undefined when calling deleteImagesImageId().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-
-        let urlPath = `/images/{imageId}`;
-        urlPath = urlPath.replace(`{${"imageId"}}`, encodeURIComponent(String(requestParameters['imageId'])));
-
-        return {
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * delete an image by marking it as deleted
-     * Delete image
-     */
-    async deleteImagesImageIdRaw(requestParameters: DeleteImagesImageIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        const requestOptions = await this.deleteImagesImageIdRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * delete an image by marking it as deleted
-     * Delete image
-     */
-    async deleteImagesImageId(requestParameters: DeleteImagesImageIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.deleteImagesImageIdRaw(requestParameters, initOverrides);
-    }
-
-    /**
-     * Creates request options for getImages without sending the request
-     */
-    async getImagesRequestOpts(requestParameters: GetImagesRequest): Promise<runtime.RequestOpts> {
+    async imagesGetRequestOpts(requestParameters: ImagesGetRequest): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -158,8 +108,8 @@ export class ImagesApi extends runtime.BaseAPI {
      * Retrieve all images for a specific project, with pagination and sorting.
      * List images for a project
      */
-    async getImagesRaw(requestParameters: GetImagesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginationPaginatedResponseImage>> {
-        const requestOptions = await this.getImagesRequestOpts(requestParameters);
+    async imagesGetRaw(requestParameters: ImagesGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginationPaginatedResponseImage>> {
+        const requestOptions = await this.imagesGetRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PaginationPaginatedResponseImageFromJSON(jsonValue));
@@ -169,19 +119,69 @@ export class ImagesApi extends runtime.BaseAPI {
      * Retrieve all images for a specific project, with pagination and sorting.
      * List images for a project
      */
-    async getImages(requestParameters: GetImagesRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginationPaginatedResponseImage> {
-        const response = await this.getImagesRaw(requestParameters, initOverrides);
+    async imagesGet(requestParameters: ImagesGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginationPaginatedResponseImage> {
+        const response = await this.imagesGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for getImagesImageId without sending the request
+     * Creates request options for imagesImageIdDelete without sending the request
      */
-    async getImagesImageIdRequestOpts(requestParameters: GetImagesImageIdRequest): Promise<runtime.RequestOpts> {
+    async imagesImageIdDeleteRequestOpts(requestParameters: ImagesImageIdDeleteRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['imageId'] == null) {
             throw new runtime.RequiredError(
                 'imageId',
-                'Required parameter "imageId" was null or undefined when calling getImagesImageId().'
+                'Required parameter "imageId" was null or undefined when calling imagesImageIdDelete().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
+        }
+
+
+        let urlPath = `/images/{imageId}`;
+        urlPath = urlPath.replace(`{${"imageId"}}`, encodeURIComponent(String(requestParameters['imageId'])));
+
+        return {
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * delete an image by marking it as deleted
+     * Delete image
+     */
+    async imagesImageIdDeleteRaw(requestParameters: ImagesImageIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        const requestOptions = await this.imagesImageIdDeleteRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * delete an image by marking it as deleted
+     * Delete image
+     */
+    async imagesImageIdDelete(requestParameters: ImagesImageIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.imagesImageIdDeleteRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     * Creates request options for imagesImageIdGet without sending the request
+     */
+    async imagesImageIdGetRequestOpts(requestParameters: ImagesImageIdGetRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['imageId'] == null) {
+            throw new runtime.RequiredError(
+                'imageId',
+                'Required parameter "imageId" was null or undefined when calling imagesImageIdGet().'
             );
         }
 
@@ -209,8 +209,8 @@ export class ImagesApi extends runtime.BaseAPI {
      * Retrieve an image by its ID for a specific project.
      * Get image
      */
-    async getImagesImageIdRaw(requestParameters: GetImagesImageIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Image>> {
-        const requestOptions = await this.getImagesImageIdRequestOpts(requestParameters);
+    async imagesImageIdGetRaw(requestParameters: ImagesImageIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Image>> {
+        const requestOptions = await this.imagesImageIdGetRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ImageFromJSON(jsonValue));
@@ -220,19 +220,19 @@ export class ImagesApi extends runtime.BaseAPI {
      * Retrieve an image by its ID for a specific project.
      * Get image
      */
-    async getImagesImageId(requestParameters: GetImagesImageIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Image> {
-        const response = await this.getImagesImageIdRaw(requestParameters, initOverrides);
+    async imagesImageIdGet(requestParameters: ImagesImageIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Image> {
+        const response = await this.imagesImageIdGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for postImagesUploadComplete without sending the request
+     * Creates request options for imagesUploadCompletePost without sending the request
      */
-    async postImagesUploadCompleteRequestOpts(requestParameters: PostImagesUploadCompleteOperationRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['postImagesUploadCompleteRequest'] == null) {
+    async imagesUploadCompletePostRequestOpts(requestParameters: ImagesUploadCompletePostOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['imagesUploadCompletePostRequest'] == null) {
             throw new runtime.RequiredError(
-                'postImagesUploadCompleteRequest',
-                'Required parameter "postImagesUploadCompleteRequest" was null or undefined when calling postImagesUploadComplete().'
+                'imagesUploadCompletePostRequest',
+                'Required parameter "imagesUploadCompletePostRequest" was null or undefined when calling imagesUploadCompletePost().'
             );
         }
 
@@ -254,7 +254,7 @@ export class ImagesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: PostImagesUploadCompleteRequestToJSON(requestParameters['postImagesUploadCompleteRequest']),
+            body: ImagesUploadCompletePostRequestToJSON(requestParameters['imagesUploadCompletePostRequest']),
         };
     }
 
@@ -262,8 +262,8 @@ export class ImagesApi extends runtime.BaseAPI {
      * Complete the upload process and create the image record using API key authentication
      * Upload: Mark as complete
      */
-    async postImagesUploadCompleteRaw(requestParameters: PostImagesUploadCompleteOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Image>> {
-        const requestOptions = await this.postImagesUploadCompleteRequestOpts(requestParameters);
+    async imagesUploadCompletePostRaw(requestParameters: ImagesUploadCompletePostOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Image>> {
+        const requestOptions = await this.imagesUploadCompletePostRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => ImageFromJSON(jsonValue));
@@ -273,19 +273,19 @@ export class ImagesApi extends runtime.BaseAPI {
      * Complete the upload process and create the image record using API key authentication
      * Upload: Mark as complete
      */
-    async postImagesUploadComplete(requestParameters: PostImagesUploadCompleteOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Image> {
-        const response = await this.postImagesUploadCompleteRaw(requestParameters, initOverrides);
+    async imagesUploadCompletePost(requestParameters: ImagesUploadCompletePostOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Image> {
+        const response = await this.imagesUploadCompletePostRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for postImagesUploadInit without sending the request
+     * Creates request options for imagesUploadInitPost without sending the request
      */
-    async postImagesUploadInitRequestOpts(requestParameters: PostImagesUploadInitOperationRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['postImagesUploadInitRequest'] == null) {
+    async imagesUploadInitPostRequestOpts(requestParameters: ImagesUploadInitPostOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['imagesUploadInitPostRequest'] == null) {
             throw new runtime.RequiredError(
-                'postImagesUploadInitRequest',
-                'Required parameter "postImagesUploadInitRequest" was null or undefined when calling postImagesUploadInit().'
+                'imagesUploadInitPostRequest',
+                'Required parameter "imagesUploadInitPostRequest" was null or undefined when calling imagesUploadInitPost().'
             );
         }
 
@@ -307,7 +307,7 @@ export class ImagesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: PostImagesUploadInitRequestToJSON(requestParameters['postImagesUploadInitRequest']),
+            body: ImagesUploadInitPostRequestToJSON(requestParameters['imagesUploadInitPostRequest']),
         };
     }
 
@@ -315,8 +315,8 @@ export class ImagesApi extends runtime.BaseAPI {
      * Initialize a presigned URL upload for an image file using API key authentication
      * Upload: Init
      */
-    async postImagesUploadInitRaw(requestParameters: PostImagesUploadInitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InternalImagesHandlerInitResponse>> {
-        const requestOptions = await this.postImagesUploadInitRequestOpts(requestParameters);
+    async imagesUploadInitPostRaw(requestParameters: ImagesUploadInitPostOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InternalImagesHandlerInitResponse>> {
+        const requestOptions = await this.imagesUploadInitPostRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => InternalImagesHandlerInitResponseFromJSON(jsonValue));
@@ -326,8 +326,8 @@ export class ImagesApi extends runtime.BaseAPI {
      * Initialize a presigned URL upload for an image file using API key authentication
      * Upload: Init
      */
-    async postImagesUploadInit(requestParameters: PostImagesUploadInitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InternalImagesHandlerInitResponse> {
-        const response = await this.postImagesUploadInitRaw(requestParameters, initOverrides);
+    async imagesUploadInitPost(requestParameters: ImagesUploadInitPostOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InternalImagesHandlerInitResponse> {
+        const response = await this.imagesUploadInitPostRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

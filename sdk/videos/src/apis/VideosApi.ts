@@ -21,13 +21,13 @@ import type {
   GithubComQeeqezApiInternalVideosHandlerUploadInitResponse,
   InternalVideosHandlerSubtitlesLanguageResponse,
   PaginationPaginatedResponseVideo,
-  PostVideosUploadCompleteRequest,
-  PostVideosUploadInitRequest,
-  PutVideosVideoIdChaptersRequest,
   Subtitle,
   SubtitleDelete,
   UpdateChaptersResponse,
   Video,
+  VideosUploadCompletePostRequest,
+  VideosUploadInitPostRequest,
+  VideosVideoIdChaptersPutRequest,
 } from '../models/index';
 import {
     AudioTrackFromJSON,
@@ -42,12 +42,6 @@ import {
     InternalVideosHandlerSubtitlesLanguageResponseToJSON,
     PaginationPaginatedResponseVideoFromJSON,
     PaginationPaginatedResponseVideoToJSON,
-    PostVideosUploadCompleteRequestFromJSON,
-    PostVideosUploadCompleteRequestToJSON,
-    PostVideosUploadInitRequestFromJSON,
-    PostVideosUploadInitRequestToJSON,
-    PutVideosVideoIdChaptersRequestFromJSON,
-    PutVideosVideoIdChaptersRequestToJSON,
     SubtitleFromJSON,
     SubtitleToJSON,
     SubtitleDeleteFromJSON,
@@ -56,87 +50,93 @@ import {
     UpdateChaptersResponseToJSON,
     VideoFromJSON,
     VideoToJSON,
+    VideosUploadCompletePostRequestFromJSON,
+    VideosUploadCompletePostRequestToJSON,
+    VideosUploadInitPostRequestFromJSON,
+    VideosUploadInitPostRequestToJSON,
+    VideosVideoIdChaptersPutRequestFromJSON,
+    VideosVideoIdChaptersPutRequestToJSON,
 } from '../models/index';
 
-export interface DeleteVideosVideoIdAudioTracksRequest {
-    videoId: string;
-}
-
-export interface DeleteVideosVideoIdAudioTracksLangCodeRequest {
-    videoId: string;
-    langCode: string;
-}
-
-export interface DeleteVideosVideoIdAudioTracksTrackIdRequest {
-    videoId: string;
-    trackId: string;
-}
-
-export interface DeleteVideosVideoIdChaptersRequest {
-    videoId: string;
-}
-
-export interface DeleteVideosVideoIdDeleteRequest {
-    videoId: string;
-}
-
-export interface DeleteVideosVideoIdSubtitlesRequest {
-    videoId: string;
-}
-
-export interface DeleteVideosVideoIdSubtitlesLangCodeRequest {
-    videoId: string;
-    langCode: string;
-}
-
-export interface DeleteVideosVideoIdSubtitlesSubtitleIdRequest {
-    videoId: string;
-    subtitleId: string;
-}
-
-export interface GetVideosRequest {
+export interface VideosGetRequest {
     limit?: number;
     offset?: number;
     sort?: string;
     order?: string;
 }
 
-export interface GetVideosVideoIdRequest {
+export interface VideosUploadCompletePostOperationRequest {
+    videosUploadCompletePostRequest: VideosUploadCompletePostRequest;
+}
+
+export interface VideosUploadInitPostOperationRequest {
+    videosUploadInitPostRequest: VideosUploadInitPostRequest;
+}
+
+export interface VideosVideoIdAudioTracksDeleteRequest {
     videoId: string;
 }
 
-export interface PostVideosUploadCompleteOperationRequest {
-    postVideosUploadCompleteRequest: PostVideosUploadCompleteRequest;
-}
-
-export interface PostVideosUploadInitOperationRequest {
-    postVideosUploadInitRequest: PostVideosUploadInitRequest;
-}
-
-export interface PostVideosVideoIdAudioTracksRequest {
-    videoId: string;
-}
-
-export interface PostVideosVideoIdSubtitlesRequest {
-    videoId: string;
-}
-
-export interface PutVideosVideoIdAudioTracksLangCodeRequest {
+export interface VideosVideoIdAudioTracksLangCodeDeleteRequest {
     videoId: string;
     langCode: string;
 }
 
-export interface PutVideosVideoIdChaptersOperationRequest {
-    videoId: string;
-    putVideosVideoIdChaptersRequest: PutVideosVideoIdChaptersRequest;
-}
-
-export interface PutVideosVideoIdSubtitlesLangCodeRequest {
+export interface VideosVideoIdAudioTracksLangCodePutRequest {
     videoId: string;
     langCode: string;
 }
 
-export interface PutVideosVideoIdThumbnailRequest {
+export interface VideosVideoIdAudioTracksPostRequest {
+    videoId: string;
+}
+
+export interface VideosVideoIdAudioTracksTrackIdDeleteRequest {
+    videoId: string;
+    trackId: string;
+}
+
+export interface VideosVideoIdChaptersDeleteRequest {
+    videoId: string;
+}
+
+export interface VideosVideoIdChaptersPutOperationRequest {
+    videoId: string;
+    videosVideoIdChaptersPutRequest: VideosVideoIdChaptersPutRequest;
+}
+
+export interface VideosVideoIdDeleteDeleteRequest {
+    videoId: string;
+}
+
+export interface VideosVideoIdGetRequest {
+    videoId: string;
+}
+
+export interface VideosVideoIdSubtitlesDeleteRequest {
+    videoId: string;
+}
+
+export interface VideosVideoIdSubtitlesLangCodeDeleteRequest {
+    videoId: string;
+    langCode: string;
+}
+
+export interface VideosVideoIdSubtitlesLangCodePutRequest {
+    videoId: string;
+    langCode: string;
+}
+
+export interface VideosVideoIdSubtitlesPostRequest {
+    videoId: string;
+}
+
+export interface VideosVideoIdSubtitlesSubtitleIdDeleteRequest {
+    videoId: string;
+    subtitleId: string;
+}
+
+export interface VideosVideoIdThumbnailPutRequest {
     videoId: string;
 }
 
@@ -146,448 +146,9 @@ export interface PutVideosVideoIdThumbnailRequest {
 export class VideosApi extends runtime.BaseAPI {
 
     /**
-     * Creates request options for deleteVideosVideoIdAudioTracks without sending the request
+     * Creates request options for videosGet without sending the request
      */
-    async deleteVideosVideoIdAudioTracksRequestOpts(requestParameters: DeleteVideosVideoIdAudioTracksRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['videoId'] == null) {
-            throw new runtime.RequiredError(
-                'videoId',
-                'Required parameter "videoId" was null or undefined when calling deleteVideosVideoIdAudioTracks().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-
-        let urlPath = `/videos/{videoId}/audio-tracks`;
-        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
-
-        return {
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Remove all additional audio tracks from a video using API key authentication
-     * Delete all audio tracks
-     */
-    async deleteVideosVideoIdAudioTracksRaw(requestParameters: DeleteVideosVideoIdAudioTracksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AudioTrackDelete>> {
-        const requestOptions = await this.deleteVideosVideoIdAudioTracksRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => AudioTrackDeleteFromJSON(jsonValue));
-    }
-
-    /**
-     * Remove all additional audio tracks from a video using API key authentication
-     * Delete all audio tracks
-     */
-    async deleteVideosVideoIdAudioTracks(requestParameters: DeleteVideosVideoIdAudioTracksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AudioTrackDelete> {
-        const response = await this.deleteVideosVideoIdAudioTracksRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for deleteVideosVideoIdAudioTracksLangCode without sending the request
-     */
-    async deleteVideosVideoIdAudioTracksLangCodeRequestOpts(requestParameters: DeleteVideosVideoIdAudioTracksLangCodeRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['videoId'] == null) {
-            throw new runtime.RequiredError(
-                'videoId',
-                'Required parameter "videoId" was null or undefined when calling deleteVideosVideoIdAudioTracksLangCode().'
-            );
-        }
-
-        if (requestParameters['langCode'] == null) {
-            throw new runtime.RequiredError(
-                'langCode',
-                'Required parameter "langCode" was null or undefined when calling deleteVideosVideoIdAudioTracksLangCode().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-
-        let urlPath = `/videos/{videoId}/audio-tracks/{lang_code}`;
-        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
-        urlPath = urlPath.replace(`{${"lang_code"}}`, encodeURIComponent(String(requestParameters['langCode'])));
-
-        return {
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Remove an audio track for a specific language using API key authentication
-     * Delete audio track by language
-     */
-    async deleteVideosVideoIdAudioTracksLangCodeRaw(requestParameters: DeleteVideosVideoIdAudioTracksLangCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AudioTrackDelete>> {
-        const requestOptions = await this.deleteVideosVideoIdAudioTracksLangCodeRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => AudioTrackDeleteFromJSON(jsonValue));
-    }
-
-    /**
-     * Remove an audio track for a specific language using API key authentication
-     * Delete audio track by language
-     */
-    async deleteVideosVideoIdAudioTracksLangCode(requestParameters: DeleteVideosVideoIdAudioTracksLangCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AudioTrackDelete> {
-        const response = await this.deleteVideosVideoIdAudioTracksLangCodeRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for deleteVideosVideoIdAudioTracksTrackId without sending the request
-     */
-    async deleteVideosVideoIdAudioTracksTrackIdRequestOpts(requestParameters: DeleteVideosVideoIdAudioTracksTrackIdRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['videoId'] == null) {
-            throw new runtime.RequiredError(
-                'videoId',
-                'Required parameter "videoId" was null or undefined when calling deleteVideosVideoIdAudioTracksTrackId().'
-            );
-        }
-
-        if (requestParameters['trackId'] == null) {
-            throw new runtime.RequiredError(
-                'trackId',
-                'Required parameter "trackId" was null or undefined when calling deleteVideosVideoIdAudioTracksTrackId().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-
-        let urlPath = `/videos/{videoId}/audio-tracks/{trackId}`;
-        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
-        urlPath = urlPath.replace(`{${"trackId"}}`, encodeURIComponent(String(requestParameters['trackId'])));
-
-        return {
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Remove an additional audio track from a video using API key authentication
-     * Delete audio track
-     */
-    async deleteVideosVideoIdAudioTracksTrackIdRaw(requestParameters: DeleteVideosVideoIdAudioTracksTrackIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AudioTrackDelete>> {
-        const requestOptions = await this.deleteVideosVideoIdAudioTracksTrackIdRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => AudioTrackDeleteFromJSON(jsonValue));
-    }
-
-    /**
-     * Remove an additional audio track from a video using API key authentication
-     * Delete audio track
-     */
-    async deleteVideosVideoIdAudioTracksTrackId(requestParameters: DeleteVideosVideoIdAudioTracksTrackIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AudioTrackDelete> {
-        const response = await this.deleteVideosVideoIdAudioTracksTrackIdRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for deleteVideosVideoIdChapters without sending the request
-     */
-    async deleteVideosVideoIdChaptersRequestOpts(requestParameters: DeleteVideosVideoIdChaptersRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['videoId'] == null) {
-            throw new runtime.RequiredError(
-                'videoId',
-                'Required parameter "videoId" was null or undefined when calling deleteVideosVideoIdChapters().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-
-        let urlPath = `/videos/{videoId}/chapters`;
-        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
-
-        return {
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Remove all chapters from a video using API key authentication
-     * Delete video chapters
-     */
-    async deleteVideosVideoIdChaptersRaw(requestParameters: DeleteVideosVideoIdChaptersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateChaptersResponse>> {
-        const requestOptions = await this.deleteVideosVideoIdChaptersRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => UpdateChaptersResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Remove all chapters from a video using API key authentication
-     * Delete video chapters
-     */
-    async deleteVideosVideoIdChapters(requestParameters: DeleteVideosVideoIdChaptersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UpdateChaptersResponse> {
-        const response = await this.deleteVideosVideoIdChaptersRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for deleteVideosVideoIdDelete without sending the request
-     */
-    async deleteVideosVideoIdDeleteRequestOpts(requestParameters: DeleteVideosVideoIdDeleteRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['videoId'] == null) {
-            throw new runtime.RequiredError(
-                'videoId',
-                'Required parameter "videoId" was null or undefined when calling deleteVideosVideoIdDelete().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-
-        let urlPath = `/videos/{videoId}/delete`;
-        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
-
-        return {
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Delete a video by its ID within a project
-     * Delete video
-     */
-    async deleteVideosVideoIdDeleteRaw(requestParameters: DeleteVideosVideoIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
-        const requestOptions = await this.deleteVideosVideoIdDeleteRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.VoidApiResponse(response);
-    }
-
-    /**
-     * Delete a video by its ID within a project
-     * Delete video
-     */
-    async deleteVideosVideoIdDelete(requestParameters: DeleteVideosVideoIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
-        await this.deleteVideosVideoIdDeleteRaw(requestParameters, initOverrides);
-    }
-
-    /**
-     * Creates request options for deleteVideosVideoIdSubtitles without sending the request
-     */
-    async deleteVideosVideoIdSubtitlesRequestOpts(requestParameters: DeleteVideosVideoIdSubtitlesRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['videoId'] == null) {
-            throw new runtime.RequiredError(
-                'videoId',
-                'Required parameter "videoId" was null or undefined when calling deleteVideosVideoIdSubtitles().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-
-        let urlPath = `/videos/{videoId}/subtitles`;
-        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
-
-        return {
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Remove all subtitles from a video using API key authentication
-     * Delete all subtitles
-     */
-    async deleteVideosVideoIdSubtitlesRaw(requestParameters: DeleteVideosVideoIdSubtitlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SubtitleDelete>> {
-        const requestOptions = await this.deleteVideosVideoIdSubtitlesRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => SubtitleDeleteFromJSON(jsonValue));
-    }
-
-    /**
-     * Remove all subtitles from a video using API key authentication
-     * Delete all subtitles
-     */
-    async deleteVideosVideoIdSubtitles(requestParameters: DeleteVideosVideoIdSubtitlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SubtitleDelete> {
-        const response = await this.deleteVideosVideoIdSubtitlesRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for deleteVideosVideoIdSubtitlesLangCode without sending the request
-     */
-    async deleteVideosVideoIdSubtitlesLangCodeRequestOpts(requestParameters: DeleteVideosVideoIdSubtitlesLangCodeRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['videoId'] == null) {
-            throw new runtime.RequiredError(
-                'videoId',
-                'Required parameter "videoId" was null or undefined when calling deleteVideosVideoIdSubtitlesLangCode().'
-            );
-        }
-
-        if (requestParameters['langCode'] == null) {
-            throw new runtime.RequiredError(
-                'langCode',
-                'Required parameter "langCode" was null or undefined when calling deleteVideosVideoIdSubtitlesLangCode().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-
-        let urlPath = `/videos/{videoId}/subtitles/{lang_code}`;
-        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
-        urlPath = urlPath.replace(`{${"lang_code"}}`, encodeURIComponent(String(requestParameters['langCode'])));
-
-        return {
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Remove a subtitle for a specific language using API key authentication
-     * Delete subtitle by language
-     */
-    async deleteVideosVideoIdSubtitlesLangCodeRaw(requestParameters: DeleteVideosVideoIdSubtitlesLangCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SubtitleDelete>> {
-        const requestOptions = await this.deleteVideosVideoIdSubtitlesLangCodeRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => SubtitleDeleteFromJSON(jsonValue));
-    }
-
-    /**
-     * Remove a subtitle for a specific language using API key authentication
-     * Delete subtitle by language
-     */
-    async deleteVideosVideoIdSubtitlesLangCode(requestParameters: DeleteVideosVideoIdSubtitlesLangCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SubtitleDelete> {
-        const response = await this.deleteVideosVideoIdSubtitlesLangCodeRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for deleteVideosVideoIdSubtitlesSubtitleId without sending the request
-     */
-    async deleteVideosVideoIdSubtitlesSubtitleIdRequestOpts(requestParameters: DeleteVideosVideoIdSubtitlesSubtitleIdRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['videoId'] == null) {
-            throw new runtime.RequiredError(
-                'videoId',
-                'Required parameter "videoId" was null or undefined when calling deleteVideosVideoIdSubtitlesSubtitleId().'
-            );
-        }
-
-        if (requestParameters['subtitleId'] == null) {
-            throw new runtime.RequiredError(
-                'subtitleId',
-                'Required parameter "subtitleId" was null or undefined when calling deleteVideosVideoIdSubtitlesSubtitleId().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-
-        let urlPath = `/videos/{videoId}/subtitles/{subtitleId}`;
-        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
-        urlPath = urlPath.replace(`{${"subtitleId"}}`, encodeURIComponent(String(requestParameters['subtitleId'])));
-
-        return {
-            path: urlPath,
-            method: 'DELETE',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Remove a subtitle from a video using API key authentication
-     * Delete subtitle
-     */
-    async deleteVideosVideoIdSubtitlesSubtitleIdRaw(requestParameters: DeleteVideosVideoIdSubtitlesSubtitleIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SubtitleDelete>> {
-        const requestOptions = await this.deleteVideosVideoIdSubtitlesSubtitleIdRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => SubtitleDeleteFromJSON(jsonValue));
-    }
-
-    /**
-     * Remove a subtitle from a video using API key authentication
-     * Delete subtitle
-     */
-    async deleteVideosVideoIdSubtitlesSubtitleId(requestParameters: DeleteVideosVideoIdSubtitlesSubtitleIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SubtitleDelete> {
-        const response = await this.deleteVideosVideoIdSubtitlesSubtitleIdRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for getVideos without sending the request
-     */
-    async getVideosRequestOpts(requestParameters: GetVideosRequest): Promise<runtime.RequestOpts> {
+    async videosGetRequestOpts(requestParameters: VideosGetRequest): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         if (requestParameters['limit'] != null) {
@@ -627,8 +188,8 @@ export class VideosApi extends runtime.BaseAPI {
      * Retrieve all videos for a specific project, with pagination and sorting.
      * List videos for a project
      */
-    async getVideosRaw(requestParameters: GetVideosRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginationPaginatedResponseVideo>> {
-        const requestOptions = await this.getVideosRequestOpts(requestParameters);
+    async videosGetRaw(requestParameters: VideosGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<PaginationPaginatedResponseVideo>> {
+        const requestOptions = await this.videosGetRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => PaginationPaginatedResponseVideoFromJSON(jsonValue));
@@ -638,15 +199,15 @@ export class VideosApi extends runtime.BaseAPI {
      * Retrieve all videos for a specific project, with pagination and sorting.
      * List videos for a project
      */
-    async getVideos(requestParameters: GetVideosRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginationPaginatedResponseVideo> {
-        const response = await this.getVideosRaw(requestParameters, initOverrides);
+    async videosGet(requestParameters: VideosGetRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<PaginationPaginatedResponseVideo> {
+        const response = await this.videosGetRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for getVideosLanguages without sending the request
+     * Creates request options for videosLanguagesGet without sending the request
      */
-    async getVideosLanguagesRequestOpts(): Promise<runtime.RequestOpts> {
+    async videosLanguagesGetRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -666,8 +227,8 @@ export class VideosApi extends runtime.BaseAPI {
      * Get list of supported languages for subtitles
      * List available subtitle languages
      */
-    async getVideosLanguagesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<InternalVideosHandlerSubtitlesLanguageResponse>>> {
-        const requestOptions = await this.getVideosLanguagesRequestOpts();
+    async videosLanguagesGetRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<InternalVideosHandlerSubtitlesLanguageResponse>>> {
+        const requestOptions = await this.videosLanguagesGetRequestOpts();
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(InternalVideosHandlerSubtitlesLanguageResponseFromJSON));
@@ -677,70 +238,19 @@ export class VideosApi extends runtime.BaseAPI {
      * Get list of supported languages for subtitles
      * List available subtitle languages
      */
-    async getVideosLanguages(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<InternalVideosHandlerSubtitlesLanguageResponse>> {
-        const response = await this.getVideosLanguagesRaw(initOverrides);
+    async videosLanguagesGet(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<InternalVideosHandlerSubtitlesLanguageResponse>> {
+        const response = await this.videosLanguagesGetRaw(initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for getVideosVideoId without sending the request
+     * Creates request options for videosUploadCompletePost without sending the request
      */
-    async getVideosVideoIdRequestOpts(requestParameters: GetVideosVideoIdRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['videoId'] == null) {
+    async videosUploadCompletePostRequestOpts(requestParameters: VideosUploadCompletePostOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['videosUploadCompletePostRequest'] == null) {
             throw new runtime.RequiredError(
-                'videoId',
-                'Required parameter "videoId" was null or undefined when calling getVideosVideoId().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-
-        let urlPath = `/videos/{videoId}`;
-        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
-
-        return {
-            path: urlPath,
-            method: 'GET',
-            headers: headerParameters,
-            query: queryParameters,
-        };
-    }
-
-    /**
-     * Retrieve a video by its ID for a specific project.
-     * Get a video
-     */
-    async getVideosVideoIdRaw(requestParameters: GetVideosVideoIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Video>> {
-        const requestOptions = await this.getVideosVideoIdRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => VideoFromJSON(jsonValue));
-    }
-
-    /**
-     * Retrieve a video by its ID for a specific project.
-     * Get a video
-     */
-    async getVideosVideoId(requestParameters: GetVideosVideoIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Video> {
-        const response = await this.getVideosVideoIdRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for postVideosUploadComplete without sending the request
-     */
-    async postVideosUploadCompleteRequestOpts(requestParameters: PostVideosUploadCompleteOperationRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['postVideosUploadCompleteRequest'] == null) {
-            throw new runtime.RequiredError(
-                'postVideosUploadCompleteRequest',
-                'Required parameter "postVideosUploadCompleteRequest" was null or undefined when calling postVideosUploadComplete().'
+                'videosUploadCompletePostRequest',
+                'Required parameter "videosUploadCompletePostRequest" was null or undefined when calling videosUploadCompletePost().'
             );
         }
 
@@ -762,7 +272,7 @@ export class VideosApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: PostVideosUploadCompleteRequestToJSON(requestParameters['postVideosUploadCompleteRequest']),
+            body: VideosUploadCompletePostRequestToJSON(requestParameters['videosUploadCompletePostRequest']),
         };
     }
 
@@ -770,8 +280,8 @@ export class VideosApi extends runtime.BaseAPI {
      * Mark a video upload as complete after successful upload to storage using API key authentication
      * Upload: Mark as complete
      */
-    async postVideosUploadCompleteRaw(requestParameters: PostVideosUploadCompleteOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Video>> {
-        const requestOptions = await this.postVideosUploadCompleteRequestOpts(requestParameters);
+    async videosUploadCompletePostRaw(requestParameters: VideosUploadCompletePostOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Video>> {
+        const requestOptions = await this.videosUploadCompletePostRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VideoFromJSON(jsonValue));
@@ -781,19 +291,19 @@ export class VideosApi extends runtime.BaseAPI {
      * Mark a video upload as complete after successful upload to storage using API key authentication
      * Upload: Mark as complete
      */
-    async postVideosUploadComplete(requestParameters: PostVideosUploadCompleteOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Video> {
-        const response = await this.postVideosUploadCompleteRaw(requestParameters, initOverrides);
+    async videosUploadCompletePost(requestParameters: VideosUploadCompletePostOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Video> {
+        const response = await this.videosUploadCompletePostRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for postVideosUploadInit without sending the request
+     * Creates request options for videosUploadInitPost without sending the request
      */
-    async postVideosUploadInitRequestOpts(requestParameters: PostVideosUploadInitOperationRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['postVideosUploadInitRequest'] == null) {
+    async videosUploadInitPostRequestOpts(requestParameters: VideosUploadInitPostOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['videosUploadInitPostRequest'] == null) {
             throw new runtime.RequiredError(
-                'postVideosUploadInitRequest',
-                'Required parameter "postVideosUploadInitRequest" was null or undefined when calling postVideosUploadInit().'
+                'videosUploadInitPostRequest',
+                'Required parameter "videosUploadInitPostRequest" was null or undefined when calling videosUploadInitPost().'
             );
         }
 
@@ -815,7 +325,7 @@ export class VideosApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: PostVideosUploadInitRequestToJSON(requestParameters['postVideosUploadInitRequest']),
+            body: VideosUploadInitPostRequestToJSON(requestParameters['videosUploadInitPostRequest']),
         };
     }
 
@@ -823,8 +333,8 @@ export class VideosApi extends runtime.BaseAPI {
      * Initialize a video upload and get presigned URLs for video and poster using API key authentication
      * Upload: Init
      */
-    async postVideosUploadInitRaw(requestParameters: PostVideosUploadInitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GithubComQeeqezApiInternalVideosHandlerUploadInitResponse>> {
-        const requestOptions = await this.postVideosUploadInitRequestOpts(requestParameters);
+    async videosUploadInitPostRaw(requestParameters: VideosUploadInitPostOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GithubComQeeqezApiInternalVideosHandlerUploadInitResponse>> {
+        const requestOptions = await this.videosUploadInitPostRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => GithubComQeeqezApiInternalVideosHandlerUploadInitResponseFromJSON(jsonValue));
@@ -834,19 +344,19 @@ export class VideosApi extends runtime.BaseAPI {
      * Initialize a video upload and get presigned URLs for video and poster using API key authentication
      * Upload: Init
      */
-    async postVideosUploadInit(requestParameters: PostVideosUploadInitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GithubComQeeqezApiInternalVideosHandlerUploadInitResponse> {
-        const response = await this.postVideosUploadInitRaw(requestParameters, initOverrides);
+    async videosUploadInitPost(requestParameters: VideosUploadInitPostOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GithubComQeeqezApiInternalVideosHandlerUploadInitResponse> {
+        const response = await this.videosUploadInitPostRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for postVideosVideoIdAudioTracks without sending the request
+     * Creates request options for videosVideoIdAudioTracksDelete without sending the request
      */
-    async postVideosVideoIdAudioTracksRequestOpts(requestParameters: PostVideosVideoIdAudioTracksRequest): Promise<runtime.RequestOpts> {
+    async videosVideoIdAudioTracksDeleteRequestOpts(requestParameters: VideosVideoIdAudioTracksDeleteRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['videoId'] == null) {
             throw new runtime.RequiredError(
                 'videoId',
-                'Required parameter "videoId" was null or undefined when calling postVideosVideoIdAudioTracks().'
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdAudioTracksDelete().'
             );
         }
 
@@ -864,40 +374,47 @@ export class VideosApi extends runtime.BaseAPI {
 
         return {
             path: urlPath,
-            method: 'POST',
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         };
     }
 
     /**
-     * Replace all audio tracks with the provided ones using API key authentication
-     * Bulk upsert video audio tracks
+     * Remove all additional audio tracks from a video using API key authentication
+     * Delete all audio tracks
      */
-    async postVideosVideoIdAudioTracksRaw(requestParameters: PostVideosVideoIdAudioTracksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<AudioTrack>>> {
-        const requestOptions = await this.postVideosVideoIdAudioTracksRequestOpts(requestParameters);
+    async videosVideoIdAudioTracksDeleteRaw(requestParameters: VideosVideoIdAudioTracksDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AudioTrackDelete>> {
+        const requestOptions = await this.videosVideoIdAudioTracksDeleteRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(AudioTrackFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => AudioTrackDeleteFromJSON(jsonValue));
     }
 
     /**
-     * Replace all audio tracks with the provided ones using API key authentication
-     * Bulk upsert video audio tracks
+     * Remove all additional audio tracks from a video using API key authentication
+     * Delete all audio tracks
      */
-    async postVideosVideoIdAudioTracks(requestParameters: PostVideosVideoIdAudioTracksRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<AudioTrack>> {
-        const response = await this.postVideosVideoIdAudioTracksRaw(requestParameters, initOverrides);
+    async videosVideoIdAudioTracksDelete(requestParameters: VideosVideoIdAudioTracksDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AudioTrackDelete> {
+        const response = await this.videosVideoIdAudioTracksDeleteRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for postVideosVideoIdSubtitles without sending the request
+     * Creates request options for videosVideoIdAudioTracksLangCodeDelete without sending the request
      */
-    async postVideosVideoIdSubtitlesRequestOpts(requestParameters: PostVideosVideoIdSubtitlesRequest): Promise<runtime.RequestOpts> {
+    async videosVideoIdAudioTracksLangCodeDeleteRequestOpts(requestParameters: VideosVideoIdAudioTracksLangCodeDeleteRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['videoId'] == null) {
             throw new runtime.RequiredError(
                 'videoId',
-                'Required parameter "videoId" was null or undefined when calling postVideosVideoIdSubtitles().'
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdAudioTracksLangCodeDelete().'
+            );
+        }
+
+        if (requestParameters['langCode'] == null) {
+            throw new runtime.RequiredError(
+                'langCode',
+                'Required parameter "langCode" was null or undefined when calling videosVideoIdAudioTracksLangCodeDelete().'
             );
         }
 
@@ -910,52 +427,53 @@ export class VideosApi extends runtime.BaseAPI {
         }
 
 
-        let urlPath = `/videos/{videoId}/subtitles`;
+        let urlPath = `/videos/{videoId}/audio-tracks/{lang_code}`;
         urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
+        urlPath = urlPath.replace(`{${"lang_code"}}`, encodeURIComponent(String(requestParameters['langCode'])));
 
         return {
             path: urlPath,
-            method: 'POST',
+            method: 'DELETE',
             headers: headerParameters,
             query: queryParameters,
         };
     }
 
     /**
-     * Replace all subtitles with the provided ones using API key authentication
-     * Bulk upsert video subtitles
+     * Remove an audio track for a specific language using API key authentication
+     * Delete audio track by language
      */
-    async postVideosVideoIdSubtitlesRaw(requestParameters: PostVideosVideoIdSubtitlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Subtitle>>> {
-        const requestOptions = await this.postVideosVideoIdSubtitlesRequestOpts(requestParameters);
+    async videosVideoIdAudioTracksLangCodeDeleteRaw(requestParameters: VideosVideoIdAudioTracksLangCodeDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AudioTrackDelete>> {
+        const requestOptions = await this.videosVideoIdAudioTracksLangCodeDeleteRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SubtitleFromJSON));
+        return new runtime.JSONApiResponse(response, (jsonValue) => AudioTrackDeleteFromJSON(jsonValue));
     }
 
     /**
-     * Replace all subtitles with the provided ones using API key authentication
-     * Bulk upsert video subtitles
+     * Remove an audio track for a specific language using API key authentication
+     * Delete audio track by language
      */
-    async postVideosVideoIdSubtitles(requestParameters: PostVideosVideoIdSubtitlesRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Subtitle>> {
-        const response = await this.postVideosVideoIdSubtitlesRaw(requestParameters, initOverrides);
+    async videosVideoIdAudioTracksLangCodeDelete(requestParameters: VideosVideoIdAudioTracksLangCodeDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AudioTrackDelete> {
+        const response = await this.videosVideoIdAudioTracksLangCodeDeleteRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for putVideosVideoIdAudioTracksLangCode without sending the request
+     * Creates request options for videosVideoIdAudioTracksLangCodePut without sending the request
      */
-    async putVideosVideoIdAudioTracksLangCodeRequestOpts(requestParameters: PutVideosVideoIdAudioTracksLangCodeRequest): Promise<runtime.RequestOpts> {
+    async videosVideoIdAudioTracksLangCodePutRequestOpts(requestParameters: VideosVideoIdAudioTracksLangCodePutRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['videoId'] == null) {
             throw new runtime.RequiredError(
                 'videoId',
-                'Required parameter "videoId" was null or undefined when calling putVideosVideoIdAudioTracksLangCode().'
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdAudioTracksLangCodePut().'
             );
         }
 
         if (requestParameters['langCode'] == null) {
             throw new runtime.RequiredError(
                 'langCode',
-                'Required parameter "langCode" was null or undefined when calling putVideosVideoIdAudioTracksLangCode().'
+                'Required parameter "langCode" was null or undefined when calling videosVideoIdAudioTracksLangCodePut().'
             );
         }
 
@@ -984,8 +502,8 @@ export class VideosApi extends runtime.BaseAPI {
      * Add or replace an audio track for a specific language using API key authentication
      * Upsert video audio track
      */
-    async putVideosVideoIdAudioTracksLangCodeRaw(requestParameters: PutVideosVideoIdAudioTracksLangCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AudioTrack>> {
-        const requestOptions = await this.putVideosVideoIdAudioTracksLangCodeRequestOpts(requestParameters);
+    async videosVideoIdAudioTracksLangCodePutRaw(requestParameters: VideosVideoIdAudioTracksLangCodePutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AudioTrack>> {
+        const requestOptions = await this.videosVideoIdAudioTracksLangCodePutRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => AudioTrackFromJSON(jsonValue));
@@ -995,26 +513,187 @@ export class VideosApi extends runtime.BaseAPI {
      * Add or replace an audio track for a specific language using API key authentication
      * Upsert video audio track
      */
-    async putVideosVideoIdAudioTracksLangCode(requestParameters: PutVideosVideoIdAudioTracksLangCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AudioTrack> {
-        const response = await this.putVideosVideoIdAudioTracksLangCodeRaw(requestParameters, initOverrides);
+    async videosVideoIdAudioTracksLangCodePut(requestParameters: VideosVideoIdAudioTracksLangCodePutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AudioTrack> {
+        const response = await this.videosVideoIdAudioTracksLangCodePutRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for putVideosVideoIdChapters without sending the request
+     * Creates request options for videosVideoIdAudioTracksPost without sending the request
      */
-    async putVideosVideoIdChaptersRequestOpts(requestParameters: PutVideosVideoIdChaptersOperationRequest): Promise<runtime.RequestOpts> {
+    async videosVideoIdAudioTracksPostRequestOpts(requestParameters: VideosVideoIdAudioTracksPostRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['videoId'] == null) {
             throw new runtime.RequiredError(
                 'videoId',
-                'Required parameter "videoId" was null or undefined when calling putVideosVideoIdChapters().'
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdAudioTracksPost().'
             );
         }
 
-        if (requestParameters['putVideosVideoIdChaptersRequest'] == null) {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
+        }
+
+
+        let urlPath = `/videos/{videoId}/audio-tracks`;
+        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Replace all audio tracks with the provided ones using API key authentication
+     * Bulk upsert video audio tracks
+     */
+    async videosVideoIdAudioTracksPostRaw(requestParameters: VideosVideoIdAudioTracksPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<AudioTrack>>> {
+        const requestOptions = await this.videosVideoIdAudioTracksPostRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(AudioTrackFromJSON));
+    }
+
+    /**
+     * Replace all audio tracks with the provided ones using API key authentication
+     * Bulk upsert video audio tracks
+     */
+    async videosVideoIdAudioTracksPost(requestParameters: VideosVideoIdAudioTracksPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<AudioTrack>> {
+        const response = await this.videosVideoIdAudioTracksPostRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for videosVideoIdAudioTracksTrackIdDelete without sending the request
+     */
+    async videosVideoIdAudioTracksTrackIdDeleteRequestOpts(requestParameters: VideosVideoIdAudioTracksTrackIdDeleteRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['videoId'] == null) {
             throw new runtime.RequiredError(
-                'putVideosVideoIdChaptersRequest',
-                'Required parameter "putVideosVideoIdChaptersRequest" was null or undefined when calling putVideosVideoIdChapters().'
+                'videoId',
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdAudioTracksTrackIdDelete().'
+            );
+        }
+
+        if (requestParameters['trackId'] == null) {
+            throw new runtime.RequiredError(
+                'trackId',
+                'Required parameter "trackId" was null or undefined when calling videosVideoIdAudioTracksTrackIdDelete().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
+        }
+
+
+        let urlPath = `/videos/{videoId}/audio-tracks/{trackId}`;
+        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
+        urlPath = urlPath.replace(`{${"trackId"}}`, encodeURIComponent(String(requestParameters['trackId'])));
+
+        return {
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Remove an additional audio track from a video using API key authentication
+     * Delete audio track
+     */
+    async videosVideoIdAudioTracksTrackIdDeleteRaw(requestParameters: VideosVideoIdAudioTracksTrackIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<AudioTrackDelete>> {
+        const requestOptions = await this.videosVideoIdAudioTracksTrackIdDeleteRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => AudioTrackDeleteFromJSON(jsonValue));
+    }
+
+    /**
+     * Remove an additional audio track from a video using API key authentication
+     * Delete audio track
+     */
+    async videosVideoIdAudioTracksTrackIdDelete(requestParameters: VideosVideoIdAudioTracksTrackIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<AudioTrackDelete> {
+        const response = await this.videosVideoIdAudioTracksTrackIdDeleteRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for videosVideoIdChaptersDelete without sending the request
+     */
+    async videosVideoIdChaptersDeleteRequestOpts(requestParameters: VideosVideoIdChaptersDeleteRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['videoId'] == null) {
+            throw new runtime.RequiredError(
+                'videoId',
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdChaptersDelete().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
+        }
+
+
+        let urlPath = `/videos/{videoId}/chapters`;
+        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
+
+        return {
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Remove all chapters from a video using API key authentication
+     * Delete video chapters
+     */
+    async videosVideoIdChaptersDeleteRaw(requestParameters: VideosVideoIdChaptersDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateChaptersResponse>> {
+        const requestOptions = await this.videosVideoIdChaptersDeleteRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => UpdateChaptersResponseFromJSON(jsonValue));
+    }
+
+    /**
+     * Remove all chapters from a video using API key authentication
+     * Delete video chapters
+     */
+    async videosVideoIdChaptersDelete(requestParameters: VideosVideoIdChaptersDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UpdateChaptersResponse> {
+        const response = await this.videosVideoIdChaptersDeleteRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for videosVideoIdChaptersPut without sending the request
+     */
+    async videosVideoIdChaptersPutRequestOpts(requestParameters: VideosVideoIdChaptersPutOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['videoId'] == null) {
+            throw new runtime.RequiredError(
+                'videoId',
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdChaptersPut().'
+            );
+        }
+
+        if (requestParameters['videosVideoIdChaptersPutRequest'] == null) {
+            throw new runtime.RequiredError(
+                'videosVideoIdChaptersPutRequest',
+                'Required parameter "videosVideoIdChaptersPutRequest" was null or undefined when calling videosVideoIdChaptersPut().'
             );
         }
 
@@ -1037,7 +716,7 @@ export class VideosApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: PutVideosVideoIdChaptersRequestToJSON(requestParameters['putVideosVideoIdChaptersRequest']),
+            body: VideosVideoIdChaptersPutRequestToJSON(requestParameters['videosVideoIdChaptersPutRequest']),
         };
     }
 
@@ -1045,8 +724,8 @@ export class VideosApi extends runtime.BaseAPI {
      * Replace all chapters for a video (atomic PUT operation) using API key authentication
      * Update video chapters
      */
-    async putVideosVideoIdChaptersRaw(requestParameters: PutVideosVideoIdChaptersOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateChaptersResponse>> {
-        const requestOptions = await this.putVideosVideoIdChaptersRequestOpts(requestParameters);
+    async videosVideoIdChaptersPutRaw(requestParameters: VideosVideoIdChaptersPutOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateChaptersResponse>> {
+        const requestOptions = await this.videosVideoIdChaptersPutRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => UpdateChaptersResponseFromJSON(jsonValue));
@@ -1056,26 +735,237 @@ export class VideosApi extends runtime.BaseAPI {
      * Replace all chapters for a video (atomic PUT operation) using API key authentication
      * Update video chapters
      */
-    async putVideosVideoIdChapters(requestParameters: PutVideosVideoIdChaptersOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UpdateChaptersResponse> {
-        const response = await this.putVideosVideoIdChaptersRaw(requestParameters, initOverrides);
+    async videosVideoIdChaptersPut(requestParameters: VideosVideoIdChaptersPutOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UpdateChaptersResponse> {
+        const response = await this.videosVideoIdChaptersPutRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for putVideosVideoIdSubtitlesLangCode without sending the request
+     * Creates request options for videosVideoIdDeleteDelete without sending the request
      */
-    async putVideosVideoIdSubtitlesLangCodeRequestOpts(requestParameters: PutVideosVideoIdSubtitlesLangCodeRequest): Promise<runtime.RequestOpts> {
+    async videosVideoIdDeleteDeleteRequestOpts(requestParameters: VideosVideoIdDeleteDeleteRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['videoId'] == null) {
             throw new runtime.RequiredError(
                 'videoId',
-                'Required parameter "videoId" was null or undefined when calling putVideosVideoIdSubtitlesLangCode().'
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdDeleteDelete().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
+        }
+
+
+        let urlPath = `/videos/{videoId}/delete`;
+        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
+
+        return {
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Delete a video by its ID within a project
+     * Delete video
+     */
+    async videosVideoIdDeleteDeleteRaw(requestParameters: VideosVideoIdDeleteDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        const requestOptions = await this.videosVideoIdDeleteDeleteRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     * Delete a video by its ID within a project
+     * Delete video
+     */
+    async videosVideoIdDeleteDelete(requestParameters: VideosVideoIdDeleteDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.videosVideoIdDeleteDeleteRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     * Creates request options for videosVideoIdGet without sending the request
+     */
+    async videosVideoIdGetRequestOpts(requestParameters: VideosVideoIdGetRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['videoId'] == null) {
+            throw new runtime.RequiredError(
+                'videoId',
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdGet().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
+        }
+
+
+        let urlPath = `/videos/{videoId}`;
+        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
+
+        return {
+            path: urlPath,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Retrieve a video by its ID for a specific project.
+     * Get a video
+     */
+    async videosVideoIdGetRaw(requestParameters: VideosVideoIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Video>> {
+        const requestOptions = await this.videosVideoIdGetRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => VideoFromJSON(jsonValue));
+    }
+
+    /**
+     * Retrieve a video by its ID for a specific project.
+     * Get a video
+     */
+    async videosVideoIdGet(requestParameters: VideosVideoIdGetRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Video> {
+        const response = await this.videosVideoIdGetRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for videosVideoIdSubtitlesDelete without sending the request
+     */
+    async videosVideoIdSubtitlesDeleteRequestOpts(requestParameters: VideosVideoIdSubtitlesDeleteRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['videoId'] == null) {
+            throw new runtime.RequiredError(
+                'videoId',
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdSubtitlesDelete().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
+        }
+
+
+        let urlPath = `/videos/{videoId}/subtitles`;
+        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
+
+        return {
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Remove all subtitles from a video using API key authentication
+     * Delete all subtitles
+     */
+    async videosVideoIdSubtitlesDeleteRaw(requestParameters: VideosVideoIdSubtitlesDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SubtitleDelete>> {
+        const requestOptions = await this.videosVideoIdSubtitlesDeleteRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => SubtitleDeleteFromJSON(jsonValue));
+    }
+
+    /**
+     * Remove all subtitles from a video using API key authentication
+     * Delete all subtitles
+     */
+    async videosVideoIdSubtitlesDelete(requestParameters: VideosVideoIdSubtitlesDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SubtitleDelete> {
+        const response = await this.videosVideoIdSubtitlesDeleteRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for videosVideoIdSubtitlesLangCodeDelete without sending the request
+     */
+    async videosVideoIdSubtitlesLangCodeDeleteRequestOpts(requestParameters: VideosVideoIdSubtitlesLangCodeDeleteRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['videoId'] == null) {
+            throw new runtime.RequiredError(
+                'videoId',
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdSubtitlesLangCodeDelete().'
             );
         }
 
         if (requestParameters['langCode'] == null) {
             throw new runtime.RequiredError(
                 'langCode',
-                'Required parameter "langCode" was null or undefined when calling putVideosVideoIdSubtitlesLangCode().'
+                'Required parameter "langCode" was null or undefined when calling videosVideoIdSubtitlesLangCodeDelete().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
+        }
+
+
+        let urlPath = `/videos/{videoId}/subtitles/{lang_code}`;
+        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
+        urlPath = urlPath.replace(`{${"lang_code"}}`, encodeURIComponent(String(requestParameters['langCode'])));
+
+        return {
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Remove a subtitle for a specific language using API key authentication
+     * Delete subtitle by language
+     */
+    async videosVideoIdSubtitlesLangCodeDeleteRaw(requestParameters: VideosVideoIdSubtitlesLangCodeDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SubtitleDelete>> {
+        const requestOptions = await this.videosVideoIdSubtitlesLangCodeDeleteRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => SubtitleDeleteFromJSON(jsonValue));
+    }
+
+    /**
+     * Remove a subtitle for a specific language using API key authentication
+     * Delete subtitle by language
+     */
+    async videosVideoIdSubtitlesLangCodeDelete(requestParameters: VideosVideoIdSubtitlesLangCodeDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SubtitleDelete> {
+        const response = await this.videosVideoIdSubtitlesLangCodeDeleteRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for videosVideoIdSubtitlesLangCodePut without sending the request
+     */
+    async videosVideoIdSubtitlesLangCodePutRequestOpts(requestParameters: VideosVideoIdSubtitlesLangCodePutRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['videoId'] == null) {
+            throw new runtime.RequiredError(
+                'videoId',
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdSubtitlesLangCodePut().'
+            );
+        }
+
+        if (requestParameters['langCode'] == null) {
+            throw new runtime.RequiredError(
+                'langCode',
+                'Required parameter "langCode" was null or undefined when calling videosVideoIdSubtitlesLangCodePut().'
             );
         }
 
@@ -1104,8 +994,8 @@ export class VideosApi extends runtime.BaseAPI {
      * Add or replace a subtitle for a specific language using API key authentication
      * Upsert video subtitle
      */
-    async putVideosVideoIdSubtitlesLangCodeRaw(requestParameters: PutVideosVideoIdSubtitlesLangCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Subtitle>> {
-        const requestOptions = await this.putVideosVideoIdSubtitlesLangCodeRequestOpts(requestParameters);
+    async videosVideoIdSubtitlesLangCodePutRaw(requestParameters: VideosVideoIdSubtitlesLangCodePutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Subtitle>> {
+        const requestOptions = await this.videosVideoIdSubtitlesLangCodePutRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => SubtitleFromJSON(jsonValue));
@@ -1115,19 +1005,129 @@ export class VideosApi extends runtime.BaseAPI {
      * Add or replace a subtitle for a specific language using API key authentication
      * Upsert video subtitle
      */
-    async putVideosVideoIdSubtitlesLangCode(requestParameters: PutVideosVideoIdSubtitlesLangCodeRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Subtitle> {
-        const response = await this.putVideosVideoIdSubtitlesLangCodeRaw(requestParameters, initOverrides);
+    async videosVideoIdSubtitlesLangCodePut(requestParameters: VideosVideoIdSubtitlesLangCodePutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Subtitle> {
+        const response = await this.videosVideoIdSubtitlesLangCodePutRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for putVideosVideoIdThumbnail without sending the request
+     * Creates request options for videosVideoIdSubtitlesPost without sending the request
      */
-    async putVideosVideoIdThumbnailRequestOpts(requestParameters: PutVideosVideoIdThumbnailRequest): Promise<runtime.RequestOpts> {
+    async videosVideoIdSubtitlesPostRequestOpts(requestParameters: VideosVideoIdSubtitlesPostRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['videoId'] == null) {
             throw new runtime.RequiredError(
                 'videoId',
-                'Required parameter "videoId" was null or undefined when calling putVideosVideoIdThumbnail().'
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdSubtitlesPost().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
+        }
+
+
+        let urlPath = `/videos/{videoId}/subtitles`;
+        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
+
+        return {
+            path: urlPath,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Replace all subtitles with the provided ones using API key authentication
+     * Bulk upsert video subtitles
+     */
+    async videosVideoIdSubtitlesPostRaw(requestParameters: VideosVideoIdSubtitlesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Array<Subtitle>>> {
+        const requestOptions = await this.videosVideoIdSubtitlesPostRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => jsonValue.map(SubtitleFromJSON));
+    }
+
+    /**
+     * Replace all subtitles with the provided ones using API key authentication
+     * Bulk upsert video subtitles
+     */
+    async videosVideoIdSubtitlesPost(requestParameters: VideosVideoIdSubtitlesPostRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Array<Subtitle>> {
+        const response = await this.videosVideoIdSubtitlesPostRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for videosVideoIdSubtitlesSubtitleIdDelete without sending the request
+     */
+    async videosVideoIdSubtitlesSubtitleIdDeleteRequestOpts(requestParameters: VideosVideoIdSubtitlesSubtitleIdDeleteRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['videoId'] == null) {
+            throw new runtime.RequiredError(
+                'videoId',
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdSubtitlesSubtitleIdDelete().'
+            );
+        }
+
+        if (requestParameters['subtitleId'] == null) {
+            throw new runtime.RequiredError(
+                'subtitleId',
+                'Required parameter "subtitleId" was null or undefined when calling videosVideoIdSubtitlesSubtitleIdDelete().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
+        }
+
+
+        let urlPath = `/videos/{videoId}/subtitles/{subtitleId}`;
+        urlPath = urlPath.replace(`{${"videoId"}}`, encodeURIComponent(String(requestParameters['videoId'])));
+        urlPath = urlPath.replace(`{${"subtitleId"}}`, encodeURIComponent(String(requestParameters['subtitleId'])));
+
+        return {
+            path: urlPath,
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        };
+    }
+
+    /**
+     * Remove a subtitle from a video using API key authentication
+     * Delete subtitle
+     */
+    async videosVideoIdSubtitlesSubtitleIdDeleteRaw(requestParameters: VideosVideoIdSubtitlesSubtitleIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<SubtitleDelete>> {
+        const requestOptions = await this.videosVideoIdSubtitlesSubtitleIdDeleteRequestOpts(requestParameters);
+        const response = await this.request(requestOptions, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => SubtitleDeleteFromJSON(jsonValue));
+    }
+
+    /**
+     * Remove a subtitle from a video using API key authentication
+     * Delete subtitle
+     */
+    async videosVideoIdSubtitlesSubtitleIdDelete(requestParameters: VideosVideoIdSubtitlesSubtitleIdDeleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<SubtitleDelete> {
+        const response = await this.videosVideoIdSubtitlesSubtitleIdDeleteRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Creates request options for videosVideoIdThumbnailPut without sending the request
+     */
+    async videosVideoIdThumbnailPutRequestOpts(requestParameters: VideosVideoIdThumbnailPutRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['videoId'] == null) {
+            throw new runtime.RequiredError(
+                'videoId',
+                'Required parameter "videoId" was null or undefined when calling videosVideoIdThumbnailPut().'
             );
         }
 
@@ -1155,8 +1155,8 @@ export class VideosApi extends runtime.BaseAPI {
      * Update the thumbnail image for an existing video using API key authentication
      * Update video thumbnail
      */
-    async putVideosVideoIdThumbnailRaw(requestParameters: PutVideosVideoIdThumbnailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Video>> {
-        const requestOptions = await this.putVideosVideoIdThumbnailRequestOpts(requestParameters);
+    async videosVideoIdThumbnailPutRaw(requestParameters: VideosVideoIdThumbnailPutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Video>> {
+        const requestOptions = await this.videosVideoIdThumbnailPutRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => VideoFromJSON(jsonValue));
@@ -1166,8 +1166,8 @@ export class VideosApi extends runtime.BaseAPI {
      * Update the thumbnail image for an existing video using API key authentication
      * Update video thumbnail
      */
-    async putVideosVideoIdThumbnail(requestParameters: PutVideosVideoIdThumbnailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Video> {
-        const response = await this.putVideosVideoIdThumbnailRaw(requestParameters, initOverrides);
+    async videosVideoIdThumbnailPut(requestParameters: VideosVideoIdThumbnailPutRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Video> {
+        const response = await this.videosVideoIdThumbnailPutRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
