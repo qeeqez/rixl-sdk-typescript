@@ -128,7 +128,12 @@ for service in "${services[@]}"; do
 	perl -0pi -e 's{localhost API}{RIXL public API}g; s{\*http://localhost\*}{*https://api.rixl.com*}g' "${service_tmp}/README.md"
 
 	rm -rf "${service_tmp}/.openapi-generator"
-	rm -f "${service_tmp}/git_push.sh"
+	rm -f \
+		"${service_tmp}/git_push.sh" \
+		"${service_tmp}/README.md" \
+		"${service_tmp}/.gitignore" \
+		"${service_tmp}/.npmignore" \
+		"${service_tmp}/.openapi-generator-ignore"
 
 	mkdir -p "${output_dir}"
 	rsync -a --delete \
