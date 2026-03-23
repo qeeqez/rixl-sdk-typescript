@@ -41,7 +41,7 @@ export interface PaginationPaginatedResponseVideo {
      */
     data?: Array<Video>;
     /**
-     * Pagination data for the request.
+     * 
      * @type {PaginationPagination}
      * @memberof PaginationPaginatedResponseVideo
      */

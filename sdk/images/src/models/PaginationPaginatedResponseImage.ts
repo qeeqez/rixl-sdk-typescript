@@ -41,7 +41,7 @@ export interface PaginationPaginatedResponseImage {
      */
     data?: Array<Image>;
     /**
-     * Pagination data for the request.
+     * 
      * @type {PaginationPagination}
      * @memberof PaginationPaginatedResponseImage
      */

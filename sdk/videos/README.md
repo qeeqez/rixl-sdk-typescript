@@ -65,12 +65,12 @@ All URIs are relative to *https://api.rixl.com*
 *VideosApi* | [**getVideos**](docs/VideosApi.md#getvideos) | **GET** /videos | List videos for a project
 *VideosApi* | [**getVideosLanguages**](docs/VideosApi.md#getvideoslanguages) | **GET** /videos/languages | List available subtitle languages
 *VideosApi* | [**getVideosVideoId**](docs/VideosApi.md#getvideosvideoid) | **GET** /videos/{videoId} | Get a video
-*VideosApi* | [**postVideosUploadComplete**](docs/VideosApi.md#postvideosuploadcomplete) | **POST** /videos/upload/complete | Upload: Mark as complete
-*VideosApi* | [**postVideosUploadInit**](docs/VideosApi.md#postvideosuploadinit) | **POST** /videos/upload/init | Upload: Init
+*VideosApi* | [**postVideosUploadComplete**](docs/VideosApi.md#postvideosuploadcompleteoperation) | **POST** /videos/upload/complete | Upload: Mark as complete
+*VideosApi* | [**postVideosUploadInit**](docs/VideosApi.md#postvideosuploadinitoperation) | **POST** /videos/upload/init | Upload: Init
 *VideosApi* | [**postVideosVideoIdAudioTracks**](docs/VideosApi.md#postvideosvideoidaudiotracks) | **POST** /videos/{videoId}/audio-tracks | Bulk upsert video audio tracks
 *VideosApi* | [**postVideosVideoIdSubtitles**](docs/VideosApi.md#postvideosvideoidsubtitles) | **POST** /videos/{videoId}/subtitles | Bulk upsert video subtitles
 *VideosApi* | [**putVideosVideoIdAudioTracksLangCode**](docs/VideosApi.md#putvideosvideoidaudiotrackslangcode) | **PUT** /videos/{videoId}/audio-tracks/{lang_code} | Upsert video audio track
-*VideosApi* | [**putVideosVideoIdChapters**](docs/VideosApi.md#putvideosvideoidchapters) | **PUT** /videos/{videoId}/chapters | Update video chapters
+*VideosApi* | [**putVideosVideoIdChapters**](docs/VideosApi.md#putvideosvideoidchaptersoperation) | **PUT** /videos/{videoId}/chapters | Update video chapters
 *VideosApi* | [**putVideosVideoIdSubtitlesLangCode**](docs/VideosApi.md#putvideosvideoidsubtitleslangcode) | **PUT** /videos/{videoId}/subtitles/{lang_code} | Upsert video subtitle
 *VideosApi* | [**putVideosVideoIdThumbnail**](docs/VideosApi.md#putvideosvideoidthumbnail) | **PUT** /videos/{videoId}/thumbnail | Update video thumbnail
 
@@ -92,6 +92,9 @@ All URIs are relative to *https://api.rixl.com*
 - [ModelFile](docs/ModelFile.md)
 - [PaginationPaginatedResponseVideo](docs/PaginationPaginatedResponseVideo.md)
 - [PaginationPagination](docs/PaginationPagination.md)
+- [PostVideosUploadCompleteRequest](docs/PostVideosUploadCompleteRequest.md)
+- [PostVideosUploadInitRequest](docs/PostVideosUploadInitRequest.md)
+- [PutVideosVideoIdChaptersRequest](docs/PutVideosVideoIdChaptersRequest.md)
 - [Subtitle](docs/Subtitle.md)
 - [SubtitleDelete](docs/SubtitleDelete.md)
 - [UpdateChaptersRequest](docs/UpdateChaptersRequest.md)

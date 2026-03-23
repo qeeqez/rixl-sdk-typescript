@@ -57,8 +57,8 @@ All URIs are relative to *https://api.rixl.com*
 *ImagesApi* | [**deleteImagesImageId**](docs/ImagesApi.md#deleteimagesimageid) | **DELETE** /images/{imageId} | Delete image
 *ImagesApi* | [**getImages**](docs/ImagesApi.md#getimages) | **GET** /images | List images for a project
 *ImagesApi* | [**getImagesImageId**](docs/ImagesApi.md#getimagesimageid) | **GET** /images/{imageId} | Get image
-*ImagesApi* | [**postImagesUploadComplete**](docs/ImagesApi.md#postimagesuploadcomplete) | **POST** /images/upload/complete | Upload: Mark as complete
-*ImagesApi* | [**postImagesUploadInit**](docs/ImagesApi.md#postimagesuploadinit) | **POST** /images/upload/init | Upload: Init
+*ImagesApi* | [**postImagesUploadComplete**](docs/ImagesApi.md#postimagesuploadcompleteoperation) | **POST** /images/upload/complete | Upload: Mark as complete
+*ImagesApi* | [**postImagesUploadInit**](docs/ImagesApi.md#postimagesuploadinitoperation) | **POST** /images/upload/init | Upload: Init
 
 
 ### Models
@@ -72,6 +72,8 @@ All URIs are relative to *https://api.rixl.com*
 - [ModelFile](docs/ModelFile.md)
 - [PaginationPaginatedResponseImage](docs/PaginationPaginatedResponseImage.md)
 - [PaginationPagination](docs/PaginationPagination.md)
+- [PostImagesUploadCompleteRequest](docs/PostImagesUploadCompleteRequest.md)
+- [PostImagesUploadInitRequest](docs/PostImagesUploadInitRequest.md)
 
 ### Authorization
 

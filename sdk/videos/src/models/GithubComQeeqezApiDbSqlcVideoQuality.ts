@@ -20,7 +20,10 @@
 export const GithubComQeeqezApiDbSqlcVideoQuality = {
     VideoQualityBasic: 'basic',
     VideoQualityShorts: 'shorts',
-    VideoQualityPro: 'pro'
+    VideoQualityPro: 'pro',
+    Basic2: 'basic',
+    Shorts2: 'shorts',
+    Pro2: 'pro'
 } as const;
 export type GithubComQeeqezApiDbSqlcVideoQuality = typeof GithubComQeeqezApiDbSqlcVideoQuality[keyof typeof GithubComQeeqezApiDbSqlcVideoQuality];
 

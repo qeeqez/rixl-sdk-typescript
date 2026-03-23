@@ -18,16 +18,16 @@ import type {
   AudioTrack,
   AudioTrackDelete,
   GithubComQeeqezApiInternalErrorsErrorResponse,
-  GithubComQeeqezApiInternalVideosHandlerUploadCompleteRequest,
   GithubComQeeqezApiInternalVideosHandlerUploadInitResponse,
   InternalVideosHandlerSubtitlesLanguageResponse,
   PaginationPaginatedResponseVideo,
+  PostVideosUploadCompleteRequest,
+  PostVideosUploadInitRequest,
+  PutVideosVideoIdChaptersRequest,
   Subtitle,
   SubtitleDelete,
-  UpdateChaptersRequest,
   UpdateChaptersResponse,
   Video,
-  VideoUploadInitRequest,
 } from '../models/index';
 import {
     AudioTrackFromJSON,
@@ -36,26 +36,26 @@ import {
     AudioTrackDeleteToJSON,
     GithubComQeeqezApiInternalErrorsErrorResponseFromJSON,
     GithubComQeeqezApiInternalErrorsErrorResponseToJSON,
-    GithubComQeeqezApiInternalVideosHandlerUploadCompleteRequestFromJSON,
-    GithubComQeeqezApiInternalVideosHandlerUploadCompleteRequestToJSON,
     GithubComQeeqezApiInternalVideosHandlerUploadInitResponseFromJSON,
     GithubComQeeqezApiInternalVideosHandlerUploadInitResponseToJSON,
     InternalVideosHandlerSubtitlesLanguageResponseFromJSON,
     InternalVideosHandlerSubtitlesLanguageResponseToJSON,
     PaginationPaginatedResponseVideoFromJSON,
     PaginationPaginatedResponseVideoToJSON,
+    PostVideosUploadCompleteRequestFromJSON,
+    PostVideosUploadCompleteRequestToJSON,
+    PostVideosUploadInitRequestFromJSON,
+    PostVideosUploadInitRequestToJSON,
+    PutVideosVideoIdChaptersRequestFromJSON,
+    PutVideosVideoIdChaptersRequestToJSON,
     SubtitleFromJSON,
     SubtitleToJSON,
     SubtitleDeleteFromJSON,
     SubtitleDeleteToJSON,
-    UpdateChaptersRequestFromJSON,
-    UpdateChaptersRequestToJSON,
     UpdateChaptersResponseFromJSON,
     UpdateChaptersResponseToJSON,
     VideoFromJSON,
     VideoToJSON,
-    VideoUploadInitRequestFromJSON,
-    VideoUploadInitRequestToJSON,
 } from '../models/index';
 
 export interface DeleteVideosVideoIdAudioTracksRequest {
@@ -105,50 +105,39 @@ export interface GetVideosVideoIdRequest {
     videoId: string;
 }
 
-export interface PostVideosUploadCompleteRequest {
-    request: GithubComQeeqezApiInternalVideosHandlerUploadCompleteRequest;
+export interface PostVideosUploadCompleteOperationRequest {
+    postVideosUploadCompleteRequest: PostVideosUploadCompleteRequest;
 }
 
-export interface PostVideosUploadInitRequest {
-    request: VideoUploadInitRequest;
+export interface PostVideosUploadInitOperationRequest {
+    postVideosUploadInitRequest: PostVideosUploadInitRequest;
 }
 
 export interface PostVideosVideoIdAudioTracksRequest {
     videoId: string;
-    files: Array<Blob>;
-    languageCodes: string;
-    labels: string;
 }
 
 export interface PostVideosVideoIdSubtitlesRequest {
     videoId: string;
-    files: Array<Blob>;
-    languageCodes: string;
-    labels: string;
 }
 
 export interface PutVideosVideoIdAudioTracksLangCodeRequest {
     videoId: string;
     langCode: string;
-    file: Blob;
-    label?: string;
 }
 
-export interface PutVideosVideoIdChaptersRequest {
+export interface PutVideosVideoIdChaptersOperationRequest {
     videoId: string;
-    request: UpdateChaptersRequest;
+    putVideosVideoIdChaptersRequest: PutVideosVideoIdChaptersRequest;
 }
 
 export interface PutVideosVideoIdSubtitlesLangCodeRequest {
     videoId: string;
     langCode: string;
-    file: Blob;
-    label?: string;
 }
 
 export interface PutVideosVideoIdThumbnailRequest {
     videoId: string;
-    thumbnail: Blob;
 }
 
 /**
@@ -747,11 +736,11 @@ export class VideosApi extends runtime.BaseAPI {
     /**
      * Creates request options for postVideosUploadComplete without sending the request
      */
-    async postVideosUploadCompleteRequestOpts(requestParameters: PostVideosUploadCompleteRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['request'] == null) {
+    async postVideosUploadCompleteRequestOpts(requestParameters: PostVideosUploadCompleteOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['postVideosUploadCompleteRequest'] == null) {
             throw new runtime.RequiredError(
-                'request',
-                'Required parameter "request" was null or undefined when calling postVideosUploadComplete().'
+                'postVideosUploadCompleteRequest',
+                'Required parameter "postVideosUploadCompleteRequest" was null or undefined when calling postVideosUploadComplete().'
             );
         }
 
@@ -773,7 +762,7 @@ export class VideosApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: GithubComQeeqezApiInternalVideosHandlerUploadCompleteRequestToJSON(requestParameters['request']),
+            body: PostVideosUploadCompleteRequestToJSON(requestParameters['postVideosUploadCompleteRequest']),
         };
     }
 
@@ -781,7 +770,7 @@ export class VideosApi extends runtime.BaseAPI {
      * Mark a video upload as complete after successful upload to storage using API key authentication
      * Upload: Mark as complete
      */
-    async postVideosUploadCompleteRaw(requestParameters: PostVideosUploadCompleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Video>> {
+    async postVideosUploadCompleteRaw(requestParameters: PostVideosUploadCompleteOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Video>> {
         const requestOptions = await this.postVideosUploadCompleteRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
@@ -792,7 +781,7 @@ export class VideosApi extends runtime.BaseAPI {
      * Mark a video upload as complete after successful upload to storage using API key authentication
      * Upload: Mark as complete
      */
-    async postVideosUploadComplete(requestParameters: PostVideosUploadCompleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Video> {
+    async postVideosUploadComplete(requestParameters: PostVideosUploadCompleteOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Video> {
         const response = await this.postVideosUploadCompleteRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -800,11 +789,11 @@ export class VideosApi extends runtime.BaseAPI {
     /**
      * Creates request options for postVideosUploadInit without sending the request
      */
-    async postVideosUploadInitRequestOpts(requestParameters: PostVideosUploadInitRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['request'] == null) {
+    async postVideosUploadInitRequestOpts(requestParameters: PostVideosUploadInitOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['postVideosUploadInitRequest'] == null) {
             throw new runtime.RequiredError(
-                'request',
-                'Required parameter "request" was null or undefined when calling postVideosUploadInit().'
+                'postVideosUploadInitRequest',
+                'Required parameter "postVideosUploadInitRequest" was null or undefined when calling postVideosUploadInit().'
             );
         }
 
@@ -826,7 +815,7 @@ export class VideosApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: VideoUploadInitRequestToJSON(requestParameters['request']),
+            body: PostVideosUploadInitRequestToJSON(requestParameters['postVideosUploadInitRequest']),
         };
     }
 
@@ -834,7 +823,7 @@ export class VideosApi extends runtime.BaseAPI {
      * Initialize a video upload and get presigned URLs for video and poster using API key authentication
      * Upload: Init
      */
-    async postVideosUploadInitRaw(requestParameters: PostVideosUploadInitRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GithubComQeeqezApiInternalVideosHandlerUploadInitResponse>> {
+    async postVideosUploadInitRaw(requestParameters: PostVideosUploadInitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GithubComQeeqezApiInternalVideosHandlerUploadInitResponse>> {
         const requestOptions = await this.postVideosUploadInitRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
@@ -845,7 +834,7 @@ export class VideosApi extends runtime.BaseAPI {
      * Initialize a video upload and get presigned URLs for video and poster using API key authentication
      * Upload: Init
      */
-    async postVideosUploadInit(requestParameters: PostVideosUploadInitRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GithubComQeeqezApiInternalVideosHandlerUploadInitResponse> {
+    async postVideosUploadInit(requestParameters: PostVideosUploadInitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GithubComQeeqezApiInternalVideosHandlerUploadInitResponse> {
         const response = await this.postVideosUploadInitRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -861,63 +850,12 @@ export class VideosApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['files'] == null) {
-            throw new runtime.RequiredError(
-                'files',
-                'Required parameter "files" was null or undefined when calling postVideosVideoIdAudioTracks().'
-            );
-        }
-
-        if (requestParameters['languageCodes'] == null) {
-            throw new runtime.RequiredError(
-                'languageCodes',
-                'Required parameter "languageCodes" was null or undefined when calling postVideosVideoIdAudioTracks().'
-            );
-        }
-
-        if (requestParameters['labels'] == null) {
-            throw new runtime.RequiredError(
-                'labels',
-                'Required parameter "labels" was null or undefined when calling postVideosVideoIdAudioTracks().'
-            );
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-        const consumes: runtime.Consume[] = [
-            { contentType: 'multipart/form-data' },
-        ];
-        // @ts-ignore: canConsumeForm may be unused
-        const canConsumeForm = runtime.canConsumeForm(consumes);
-
-        let formParams: { append(param: string, value: any): any };
-        let useForm = false;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        useForm = canConsumeForm;
-        if (useForm) {
-            formParams = new FormData();
-        } else {
-            formParams = new URLSearchParams();
-        }
-
-        if (requestParameters['files'] != null) {
-            requestParameters['files'].forEach((element) => {
-                formParams.append('files', element as any);
-            })
-        }
-
-        if (requestParameters['languageCodes'] != null) {
-            formParams.append('language_codes', requestParameters['languageCodes'] as any);
-        }
-
-        if (requestParameters['labels'] != null) {
-            formParams.append('labels', requestParameters['labels'] as any);
         }
 
 
@@ -929,7 +867,6 @@ export class VideosApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: formParams,
         };
     }
 
@@ -964,63 +901,12 @@ export class VideosApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['files'] == null) {
-            throw new runtime.RequiredError(
-                'files',
-                'Required parameter "files" was null or undefined when calling postVideosVideoIdSubtitles().'
-            );
-        }
-
-        if (requestParameters['languageCodes'] == null) {
-            throw new runtime.RequiredError(
-                'languageCodes',
-                'Required parameter "languageCodes" was null or undefined when calling postVideosVideoIdSubtitles().'
-            );
-        }
-
-        if (requestParameters['labels'] == null) {
-            throw new runtime.RequiredError(
-                'labels',
-                'Required parameter "labels" was null or undefined when calling postVideosVideoIdSubtitles().'
-            );
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-        const consumes: runtime.Consume[] = [
-            { contentType: 'multipart/form-data' },
-        ];
-        // @ts-ignore: canConsumeForm may be unused
-        const canConsumeForm = runtime.canConsumeForm(consumes);
-
-        let formParams: { append(param: string, value: any): any };
-        let useForm = false;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        useForm = canConsumeForm;
-        if (useForm) {
-            formParams = new FormData();
-        } else {
-            formParams = new URLSearchParams();
-        }
-
-        if (requestParameters['files'] != null) {
-            requestParameters['files'].forEach((element) => {
-                formParams.append('files', element as any);
-            })
-        }
-
-        if (requestParameters['languageCodes'] != null) {
-            formParams.append('language_codes', requestParameters['languageCodes'] as any);
-        }
-
-        if (requestParameters['labels'] != null) {
-            formParams.append('labels', requestParameters['labels'] as any);
         }
 
 
@@ -1032,7 +918,6 @@ export class VideosApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: formParams,
         };
     }
 
@@ -1074,43 +959,12 @@ export class VideosApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['file'] == null) {
-            throw new runtime.RequiredError(
-                'file',
-                'Required parameter "file" was null or undefined when calling putVideosVideoIdAudioTracksLangCode().'
-            );
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-        const consumes: runtime.Consume[] = [
-            { contentType: 'multipart/form-data' },
-        ];
-        // @ts-ignore: canConsumeForm may be unused
-        const canConsumeForm = runtime.canConsumeForm(consumes);
-
-        let formParams: { append(param: string, value: any): any };
-        let useForm = false;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        useForm = canConsumeForm;
-        if (useForm) {
-            formParams = new FormData();
-        } else {
-            formParams = new URLSearchParams();
-        }
-
-        if (requestParameters['file'] != null) {
-            formParams.append('file', requestParameters['file'] as any);
-        }
-
-        if (requestParameters['label'] != null) {
-            formParams.append('label', requestParameters['label'] as any);
         }
 
 
@@ -1123,7 +977,6 @@ export class VideosApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: formParams,
         };
     }
 
@@ -1150,7 +1003,7 @@ export class VideosApi extends runtime.BaseAPI {
     /**
      * Creates request options for putVideosVideoIdChapters without sending the request
      */
-    async putVideosVideoIdChaptersRequestOpts(requestParameters: PutVideosVideoIdChaptersRequest): Promise<runtime.RequestOpts> {
+    async putVideosVideoIdChaptersRequestOpts(requestParameters: PutVideosVideoIdChaptersOperationRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['videoId'] == null) {
             throw new runtime.RequiredError(
                 'videoId',
@@ -1158,10 +1011,10 @@ export class VideosApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['request'] == null) {
+        if (requestParameters['putVideosVideoIdChaptersRequest'] == null) {
             throw new runtime.RequiredError(
-                'request',
-                'Required parameter "request" was null or undefined when calling putVideosVideoIdChapters().'
+                'putVideosVideoIdChaptersRequest',
+                'Required parameter "putVideosVideoIdChaptersRequest" was null or undefined when calling putVideosVideoIdChapters().'
             );
         }
 
@@ -1184,7 +1037,7 @@ export class VideosApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: UpdateChaptersRequestToJSON(requestParameters['request']),
+            body: PutVideosVideoIdChaptersRequestToJSON(requestParameters['putVideosVideoIdChaptersRequest']),
         };
     }
 
@@ -1192,7 +1045,7 @@ export class VideosApi extends runtime.BaseAPI {
      * Replace all chapters for a video (atomic PUT operation) using API key authentication
      * Update video chapters
      */
-    async putVideosVideoIdChaptersRaw(requestParameters: PutVideosVideoIdChaptersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateChaptersResponse>> {
+    async putVideosVideoIdChaptersRaw(requestParameters: PutVideosVideoIdChaptersOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UpdateChaptersResponse>> {
         const requestOptions = await this.putVideosVideoIdChaptersRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
@@ -1203,7 +1056,7 @@ export class VideosApi extends runtime.BaseAPI {
      * Replace all chapters for a video (atomic PUT operation) using API key authentication
      * Update video chapters
      */
-    async putVideosVideoIdChapters(requestParameters: PutVideosVideoIdChaptersRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UpdateChaptersResponse> {
+    async putVideosVideoIdChapters(requestParameters: PutVideosVideoIdChaptersOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UpdateChaptersResponse> {
         const response = await this.putVideosVideoIdChaptersRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -1226,43 +1079,12 @@ export class VideosApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['file'] == null) {
-            throw new runtime.RequiredError(
-                'file',
-                'Required parameter "file" was null or undefined when calling putVideosVideoIdSubtitlesLangCode().'
-            );
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-        const consumes: runtime.Consume[] = [
-            { contentType: 'multipart/form-data' },
-        ];
-        // @ts-ignore: canConsumeForm may be unused
-        const canConsumeForm = runtime.canConsumeForm(consumes);
-
-        let formParams: { append(param: string, value: any): any };
-        let useForm = false;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        useForm = canConsumeForm;
-        if (useForm) {
-            formParams = new FormData();
-        } else {
-            formParams = new URLSearchParams();
-        }
-
-        if (requestParameters['file'] != null) {
-            formParams.append('file', requestParameters['file'] as any);
-        }
-
-        if (requestParameters['label'] != null) {
-            formParams.append('label', requestParameters['label'] as any);
         }
 
 
@@ -1275,7 +1097,6 @@ export class VideosApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: formParams,
         };
     }
 
@@ -1310,39 +1131,12 @@ export class VideosApi extends runtime.BaseAPI {
             );
         }
 
-        if (requestParameters['thumbnail'] == null) {
-            throw new runtime.RequiredError(
-                'thumbnail',
-                'Required parameter "thumbnail" was null or undefined when calling putVideosVideoIdThumbnail().'
-            );
-        }
-
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
 
         if (this.configuration && this.configuration.apiKey) {
             headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
-        }
-
-        const consumes: runtime.Consume[] = [
-            { contentType: 'multipart/form-data' },
-        ];
-        // @ts-ignore: canConsumeForm may be unused
-        const canConsumeForm = runtime.canConsumeForm(consumes);
-
-        let formParams: { append(param: string, value: any): any };
-        let useForm = false;
-        // use FormData to transmit files using content-type "multipart/form-data"
-        useForm = canConsumeForm;
-        if (useForm) {
-            formParams = new FormData();
-        } else {
-            formParams = new URLSearchParams();
-        }
-
-        if (requestParameters['thumbnail'] != null) {
-            formParams.append('thumbnail', requestParameters['thumbnail'] as any);
         }
 
 
@@ -1354,7 +1148,6 @@ export class VideosApi extends runtime.BaseAPI {
             method: 'PUT',
             headers: headerParameters,
             query: queryParameters,
-            body: formParams,
         };
     }
 

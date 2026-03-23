@@ -41,7 +41,7 @@ export interface PaginationPaginatedResponsePost {
      */
     data?: Array<Post>;
     /**
-     * Pagination data for the request.
+     * 
      * @type {PaginationPagination}
      * @memberof PaginationPaginatedResponsePost
      */

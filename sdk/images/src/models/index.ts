@@ -9,3 +9,5 @@ export * from './InternalImagesHandlerUploadInitRequest';
 export * from './ModelFile';
 export * from './PaginationPaginatedResponseImage';
 export * from './PaginationPagination';
+export * from './PostImagesUploadCompleteRequest';
+export * from './PostImagesUploadInitRequest';

@@ -17,24 +17,24 @@ import * as runtime from '../runtime';
 import type {
   GithubComQeeqezApiInternalErrorsErrorResponse,
   Image,
-  InternalImagesHandlerCompleteRequest,
   InternalImagesHandlerInitResponse,
-  InternalImagesHandlerUploadInitRequest,
   PaginationPaginatedResponseImage,
+  PostImagesUploadCompleteRequest,
+  PostImagesUploadInitRequest,
 } from '../models/index';
 import {
     GithubComQeeqezApiInternalErrorsErrorResponseFromJSON,
     GithubComQeeqezApiInternalErrorsErrorResponseToJSON,
     ImageFromJSON,
     ImageToJSON,
-    InternalImagesHandlerCompleteRequestFromJSON,
-    InternalImagesHandlerCompleteRequestToJSON,
     InternalImagesHandlerInitResponseFromJSON,
     InternalImagesHandlerInitResponseToJSON,
-    InternalImagesHandlerUploadInitRequestFromJSON,
-    InternalImagesHandlerUploadInitRequestToJSON,
     PaginationPaginatedResponseImageFromJSON,
     PaginationPaginatedResponseImageToJSON,
+    PostImagesUploadCompleteRequestFromJSON,
+    PostImagesUploadCompleteRequestToJSON,
+    PostImagesUploadInitRequestFromJSON,
+    PostImagesUploadInitRequestToJSON,
 } from '../models/index';
 
 export interface DeleteImagesImageIdRequest {
@@ -52,12 +52,12 @@ export interface GetImagesImageIdRequest {
     imageId: string;
 }
 
-export interface PostImagesUploadCompleteRequest {
-    request: InternalImagesHandlerCompleteRequest;
+export interface PostImagesUploadCompleteOperationRequest {
+    postImagesUploadCompleteRequest: PostImagesUploadCompleteRequest;
 }
 
-export interface PostImagesUploadInitRequest {
-    request: InternalImagesHandlerUploadInitRequest;
+export interface PostImagesUploadInitOperationRequest {
+    postImagesUploadInitRequest: PostImagesUploadInitRequest;
 }
 
 /**
@@ -228,11 +228,11 @@ export class ImagesApi extends runtime.BaseAPI {
     /**
      * Creates request options for postImagesUploadComplete without sending the request
      */
-    async postImagesUploadCompleteRequestOpts(requestParameters: PostImagesUploadCompleteRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['request'] == null) {
+    async postImagesUploadCompleteRequestOpts(requestParameters: PostImagesUploadCompleteOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['postImagesUploadCompleteRequest'] == null) {
             throw new runtime.RequiredError(
-                'request',
-                'Required parameter "request" was null or undefined when calling postImagesUploadComplete().'
+                'postImagesUploadCompleteRequest',
+                'Required parameter "postImagesUploadCompleteRequest" was null or undefined when calling postImagesUploadComplete().'
             );
         }
 
@@ -254,7 +254,7 @@ export class ImagesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: InternalImagesHandlerCompleteRequestToJSON(requestParameters['request']),
+            body: PostImagesUploadCompleteRequestToJSON(requestParameters['postImagesUploadCompleteRequest']),
         };
     }
 
@@ -262,7 +262,7 @@ export class ImagesApi extends runtime.BaseAPI {
      * Complete the upload process and create the image record using API key authentication
      * Upload: Mark as complete
      */
-    async postImagesUploadCompleteRaw(requestParameters: PostImagesUploadCompleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Image>> {
+    async postImagesUploadCompleteRaw(requestParameters: PostImagesUploadCompleteOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Image>> {
         const requestOptions = await this.postImagesUploadCompleteRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
@@ -273,7 +273,7 @@ export class ImagesApi extends runtime.BaseAPI {
      * Complete the upload process and create the image record using API key authentication
      * Upload: Mark as complete
      */
-    async postImagesUploadComplete(requestParameters: PostImagesUploadCompleteRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Image> {
+    async postImagesUploadComplete(requestParameters: PostImagesUploadCompleteOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Image> {
         const response = await this.postImagesUploadCompleteRaw(requestParameters, initOverrides);
         return await response.value();
     }
@@ -281,11 +281,11 @@ export class ImagesApi extends runtime.BaseAPI {
     /**
      * Creates request options for postImagesUploadInit without sending the request
      */
-    async postImagesUploadInitRequestOpts(requestParameters: PostImagesUploadInitRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['request'] == null) {
+    async postImagesUploadInitRequestOpts(requestParameters: PostImagesUploadInitOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['postImagesUploadInitRequest'] == null) {
             throw new runtime.RequiredError(
-                'request',
-                'Required parameter "request" was null or undefined when calling postImagesUploadInit().'
+                'postImagesUploadInitRequest',
+                'Required parameter "postImagesUploadInitRequest" was null or undefined when calling postImagesUploadInit().'
             );
         }
 
@@ -307,7 +307,7 @@ export class ImagesApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: InternalImagesHandlerUploadInitRequestToJSON(requestParameters['request']),
+            body: PostImagesUploadInitRequestToJSON(requestParameters['postImagesUploadInitRequest']),
         };
     }
 
@@ -315,7 +315,7 @@ export class ImagesApi extends runtime.BaseAPI {
      * Initialize a presigned URL upload for an image file using API key authentication
      * Upload: Init
      */
-    async postImagesUploadInitRaw(requestParameters: PostImagesUploadInitRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InternalImagesHandlerInitResponse>> {
+    async postImagesUploadInitRaw(requestParameters: PostImagesUploadInitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<InternalImagesHandlerInitResponse>> {
         const requestOptions = await this.postImagesUploadInitRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
@@ -326,7 +326,7 @@ export class ImagesApi extends runtime.BaseAPI {
      * Initialize a presigned URL upload for an image file using API key authentication
      * Upload: Init
      */
-    async postImagesUploadInit(requestParameters: PostImagesUploadInitRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InternalImagesHandlerInitResponse> {
+    async postImagesUploadInit(requestParameters: PostImagesUploadInitOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<InternalImagesHandlerInitResponse> {
         const response = await this.postImagesUploadInitRaw(requestParameters, initOverrides);
         return await response.value();
     }
