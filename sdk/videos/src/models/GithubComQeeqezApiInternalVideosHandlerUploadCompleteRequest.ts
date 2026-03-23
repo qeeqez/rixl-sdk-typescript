@@ -24,7 +24,7 @@ export interface GithubComQeeqezApiInternalVideosHandlerUploadCompleteRequest {
      * @type {string}
      * @memberof GithubComQeeqezApiInternalVideosHandlerUploadCompleteRequest
      */
-    video_id?: string;
+    videoId?: string;
 }
 
 /**
@@ -44,7 +44,7 @@ export function GithubComQeeqezApiInternalVideosHandlerUploadCompleteRequestFrom
     }
     return {
         
-        'video_id': json['video_id'] == null ? undefined : json['video_id'],
+        'videoId': json['video_id'] == null ? undefined : json['video_id'],
     };
 }
 
@@ -59,7 +59,7 @@ export function GithubComQeeqezApiInternalVideosHandlerUploadCompleteRequestToJS
 
     return {
         
-        'video_id': value['video_id'],
+        'video_id': value['videoId'],
     };
 }
 

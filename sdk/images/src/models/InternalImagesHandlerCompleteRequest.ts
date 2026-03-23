@@ -24,13 +24,13 @@ export interface InternalImagesHandlerCompleteRequest {
      * @type {boolean}
      * @memberof InternalImagesHandlerCompleteRequest
      */
-    attached_to_video?: boolean;
+    attachedToVideo?: boolean;
     /**
      * 
      * @type {string}
      * @memberof InternalImagesHandlerCompleteRequest
      */
-    image_id?: string;
+    imageId?: string;
 }
 
 /**
@@ -50,8 +50,8 @@ export function InternalImagesHandlerCompleteRequestFromJSONTyped(json: any, ign
     }
     return {
         
-        'attached_to_video': json['attached_to_video'] == null ? undefined : json['attached_to_video'],
-        'image_id': json['image_id'] == null ? undefined : json['image_id'],
+        'attachedToVideo': json['attached_to_video'] == null ? undefined : json['attached_to_video'],
+        'imageId': json['image_id'] == null ? undefined : json['image_id'],
     };
 }
 
@@ -66,8 +66,8 @@ export function InternalImagesHandlerCompleteRequestToJSONTyped(value?: Internal
 
     return {
         
-        'attached_to_video': value['attached_to_video'],
-        'image_id': value['image_id'],
+        'attached_to_video': value['attachedToVideo'],
+        'image_id': value['imageId'],
     };
 }
 

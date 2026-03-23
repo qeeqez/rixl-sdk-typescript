@@ -12,16 +12,17 @@
  * Do not edit the class manually.
  */
 
+
 /**
  * 
  * @export
- * @enum {string}
  */
-export enum GithubComQeeqezApiDbSqlcVideoQuality {
-    VideoQualityBasic = 'basic',
-    VideoQualityShorts = 'shorts',
-    VideoQualityPro = 'pro'
-}
+export const GithubComQeeqezApiDbSqlcVideoQuality = {
+    VideoQualityBasic: 'basic',
+    VideoQualityShorts: 'shorts',
+    VideoQualityPro: 'pro'
+} as const;
+export type GithubComQeeqezApiDbSqlcVideoQuality = typeof GithubComQeeqezApiDbSqlcVideoQuality[keyof typeof GithubComQeeqezApiDbSqlcVideoQuality];
 
 
 export function instanceOfGithubComQeeqezApiDbSqlcVideoQuality(value: any): boolean {

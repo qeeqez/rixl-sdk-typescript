@@ -24,7 +24,7 @@ export interface Image {
      * @type {boolean}
      * @memberof Image
      */
-    attached_to_video?: boolean;
+    attachedToVideo?: boolean;
     /**
      * 
      * @type {any}
@@ -74,7 +74,7 @@ export function ImageFromJSONTyped(json: any, ignoreDiscriminator: boolean): Ima
     }
     return {
         
-        'attached_to_video': json['attached_to_video'] == null ? undefined : json['attached_to_video'],
+        'attachedToVideo': json['attached_to_video'] == null ? undefined : json['attached_to_video'],
         'file': json['file'] == null ? undefined : json['file'],
         'height': json['height'] == null ? undefined : json['height'],
         'id': json['id'] == null ? undefined : json['id'],
@@ -94,7 +94,7 @@ export function ImageToJSONTyped(value?: Image | null, ignoreDiscriminator: bool
 
     return {
         
-        'attached_to_video': value['attached_to_video'],
+        'attached_to_video': value['attachedToVideo'],
         'file': value['file'],
         'height': value['height'],
         'id': value['id'],

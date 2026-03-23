@@ -24,19 +24,19 @@ export interface InternalImagesHandlerInitResponse {
      * @type {string}
      * @memberof InternalImagesHandlerInitResponse
      */
-    image_id?: string;
+    imageId?: string;
     /**
      * 
      * @type {string}
      * @memberof InternalImagesHandlerInitResponse
      */
-    presigned_url?: string;
+    presignedUrl?: string;
     /**
      * 
      * @type {number}
      * @memberof InternalImagesHandlerInitResponse
      */
-    upload_expires?: number;
+    uploadExpires?: number;
 }
 
 /**
@@ -56,9 +56,9 @@ export function InternalImagesHandlerInitResponseFromJSONTyped(json: any, ignore
     }
     return {
         
-        'image_id': json['image_id'] == null ? undefined : json['image_id'],
-        'presigned_url': json['presigned_url'] == null ? undefined : json['presigned_url'],
-        'upload_expires': json['upload_expires'] == null ? undefined : json['upload_expires'],
+        'imageId': json['image_id'] == null ? undefined : json['image_id'],
+        'presignedUrl': json['presigned_url'] == null ? undefined : json['presigned_url'],
+        'uploadExpires': json['upload_expires'] == null ? undefined : json['upload_expires'],
     };
 }
 
@@ -73,9 +73,9 @@ export function InternalImagesHandlerInitResponseToJSONTyped(value?: InternalIma
 
     return {
         
-        'image_id': value['image_id'],
-        'presigned_url': value['presigned_url'],
-        'upload_expires': value['upload_expires'],
+        'image_id': value['imageId'],
+        'presigned_url': value['presignedUrl'],
+        'upload_expires': value['uploadExpires'],
     };
 }
 

@@ -53,13 +53,13 @@ export interface Post {
      * @type {string}
      * @memberof Post
      */
-    created_at?: string;
+    createdAt?: string;
     /**
      * 
      * @type {string}
      * @memberof Post
      */
-    creator_id?: string;
+    creatorId?: string;
     /**
      * 
      * @type {string}
@@ -71,7 +71,7 @@ export interface Post {
      * @type {string}
      * @memberof Post
      */
-    feed_id?: string;
+    feedId?: string;
     /**
      * 
      * @type {string}
@@ -89,7 +89,7 @@ export interface Post {
      * @type {GithubComQeeqezApiDbSqlcPlanType}
      * @memberof Post
      */
-    plan_type?: GithubComQeeqezApiDbSqlcPlanType;
+    planType?: GithubComQeeqezApiDbSqlcPlanType;
     /**
      * 
      * @type {PostType}
@@ -101,7 +101,7 @@ export interface Post {
      * @type {string}
      * @memberof Post
      */
-    updated_at?: string;
+    updatedAt?: string;
     /**
      * 
      * @type {GithubComQeeqezApiInternalVideosVideoResponse}
@@ -129,15 +129,15 @@ export function PostFromJSONTyped(json: any, ignoreDiscriminator: boolean): Post
     }
     return {
         
-        'created_at': json['created_at'] == null ? undefined : json['created_at'],
-        'creator_id': json['creator_id'] == null ? undefined : json['creator_id'],
+        'createdAt': json['created_at'] == null ? undefined : json['created_at'],
+        'creatorId': json['creator_id'] == null ? undefined : json['creator_id'],
         'description': json['description'] == null ? undefined : json['description'],
-        'feed_id': json['feed_id'] == null ? undefined : json['feed_id'],
+        'feedId': json['feed_id'] == null ? undefined : json['feed_id'],
         'id': json['id'] == null ? undefined : json['id'],
         'image': json['image'] == null ? undefined : ImageFromJSON(json['image']),
-        'plan_type': json['plan_type'] == null ? undefined : GithubComQeeqezApiDbSqlcPlanTypeFromJSON(json['plan_type']),
+        'planType': json['plan_type'] == null ? undefined : GithubComQeeqezApiDbSqlcPlanTypeFromJSON(json['plan_type']),
         'type': json['type'] == null ? undefined : PostTypeFromJSON(json['type']),
-        'updated_at': json['updated_at'] == null ? undefined : json['updated_at'],
+        'updatedAt': json['updated_at'] == null ? undefined : json['updated_at'],
         'video': json['video'] == null ? undefined : GithubComQeeqezApiInternalVideosVideoResponseFromJSON(json['video']),
     };
 }
@@ -153,15 +153,15 @@ export function PostToJSONTyped(value?: Post | null, ignoreDiscriminator: boolea
 
     return {
         
-        'created_at': value['created_at'],
-        'creator_id': value['creator_id'],
+        'created_at': value['createdAt'],
+        'creator_id': value['creatorId'],
         'description': value['description'],
-        'feed_id': value['feed_id'],
+        'feed_id': value['feedId'],
         'id': value['id'],
         'image': ImageToJSON(value['image']),
-        'plan_type': GithubComQeeqezApiDbSqlcPlanTypeToJSON(value['plan_type']),
+        'plan_type': GithubComQeeqezApiDbSqlcPlanTypeToJSON(value['planType']),
         'type': PostTypeToJSON(value['type']),
-        'updated_at': value['updated_at'],
+        'updated_at': value['updatedAt'],
         'video': GithubComQeeqezApiInternalVideosVideoResponseToJSON(value['video']),
     };
 }

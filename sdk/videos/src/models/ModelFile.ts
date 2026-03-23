@@ -32,7 +32,7 @@ export interface ModelFile {
      * @type {string}
      * @memberof ModelFile
      */
-    created_at?: string;
+    createdAt?: string;
     /**
      * 
      * @type {string}
@@ -56,7 +56,7 @@ export interface ModelFile {
      * @type {string}
      * @memberof ModelFile
      */
-    project_id?: string;
+    projectId?: string;
     /**
      * 
      * @type {number}
@@ -74,7 +74,7 @@ export interface ModelFile {
      * @type {string}
      * @memberof ModelFile
      */
-    updated_at?: string;
+    updatedAt?: string;
     /**
      * 
      * @type {string}
@@ -102,14 +102,14 @@ export function ModelFileFromJSONTyped(json: any, ignoreDiscriminator: boolean):
     }
     return {
         
-        'created_at': json['created_at'] == null ? undefined : json['created_at'],
+        'createdAt': json['created_at'] == null ? undefined : json['created_at'],
         'format': json['format'] == null ? undefined : json['format'],
         'id': json['id'] == null ? undefined : json['id'],
         'name': json['name'] == null ? undefined : json['name'],
-        'project_id': json['project_id'] == null ? undefined : json['project_id'],
+        'projectId': json['project_id'] == null ? undefined : json['project_id'],
         'size': json['size'] == null ? undefined : json['size'],
         'status': json['status'] == null ? undefined : FileStatusFromJSON(json['status']),
-        'updated_at': json['updated_at'] == null ? undefined : json['updated_at'],
+        'updatedAt': json['updated_at'] == null ? undefined : json['updated_at'],
         'url': json['url'] == null ? undefined : json['url'],
     };
 }
@@ -125,14 +125,14 @@ export function ModelFileToJSONTyped(value?: ModelFile | null, ignoreDiscriminat
 
     return {
         
-        'created_at': value['created_at'],
+        'created_at': value['createdAt'],
         'format': value['format'],
         'id': value['id'],
         'name': value['name'],
-        'project_id': value['project_id'],
+        'project_id': value['projectId'],
         'size': value['size'],
         'status': FileStatusToJSON(value['status']),
-        'updated_at': value['updated_at'],
+        'updated_at': value['updatedAt'],
         'url': value['url'],
     };
 }

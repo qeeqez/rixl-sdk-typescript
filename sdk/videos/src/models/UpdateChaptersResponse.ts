@@ -38,7 +38,7 @@ export interface UpdateChaptersResponse {
      * @type {string}
      * @memberof UpdateChaptersResponse
      */
-    video_id?: string;
+    videoId?: string;
 }
 
 /**
@@ -59,7 +59,7 @@ export function UpdateChaptersResponseFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'chapters': json['chapters'] == null ? undefined : ((json['chapters'] as Array<any>).map(ChapterFromJSON)),
-        'video_id': json['video_id'] == null ? undefined : json['video_id'],
+        'videoId': json['video_id'] == null ? undefined : json['video_id'],
     };
 }
 
@@ -75,7 +75,7 @@ export function UpdateChaptersResponseToJSONTyped(value?: UpdateChaptersResponse
     return {
         
         'chapters': value['chapters'] == null ? undefined : ((value['chapters'] as Array<any>).map(ChapterToJSON)),
-        'video_id': value['video_id'],
+        'video_id': value['videoId'],
     };
 }
 

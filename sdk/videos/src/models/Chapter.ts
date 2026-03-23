@@ -24,19 +24,19 @@ export interface Chapter {
      * @type {string}
      * @memberof Chapter
      */
-    duration_label?: string;
+    durationLabel?: string;
     /**
      * 
      * @type {number}
      * @memberof Chapter
      */
-    end_time_sec?: number;
+    endTimeSec?: number;
     /**
      * 
      * @type {number}
      * @memberof Chapter
      */
-    start_time_sec?: number;
+    startTimeSec?: number;
     /**
      * 
      * @type {string}
@@ -62,9 +62,9 @@ export function ChapterFromJSONTyped(json: any, ignoreDiscriminator: boolean): C
     }
     return {
         
-        'duration_label': json['duration_label'] == null ? undefined : json['duration_label'],
-        'end_time_sec': json['end_time_sec'] == null ? undefined : json['end_time_sec'],
-        'start_time_sec': json['start_time_sec'] == null ? undefined : json['start_time_sec'],
+        'durationLabel': json['duration_label'] == null ? undefined : json['duration_label'],
+        'endTimeSec': json['end_time_sec'] == null ? undefined : json['end_time_sec'],
+        'startTimeSec': json['start_time_sec'] == null ? undefined : json['start_time_sec'],
         'title': json['title'] == null ? undefined : json['title'],
     };
 }
@@ -80,9 +80,9 @@ export function ChapterToJSONTyped(value?: Chapter | null, ignoreDiscriminator: 
 
     return {
         
-        'duration_label': value['duration_label'],
-        'end_time_sec': value['end_time_sec'],
-        'start_time_sec': value['start_time_sec'],
+        'duration_label': value['durationLabel'],
+        'end_time_sec': value['endTimeSec'],
+        'start_time_sec': value['startTimeSec'],
         'title': value['title'],
     };
 }

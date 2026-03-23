@@ -100,7 +100,7 @@ export interface Video {
      * @type {GithubComQeeqezApiDbSqlcPlanType}
      * @memberof Video
      */
-    plan_type?: GithubComQeeqezApiDbSqlcPlanType;
+    planType?: GithubComQeeqezApiDbSqlcPlanType;
     /**
      * 
      * @type {Image}
@@ -143,7 +143,7 @@ export function VideoFromJSONTyped(json: any, ignoreDiscriminator: boolean): Vid
         'hdr': json['hdr'] == null ? undefined : json['hdr'],
         'height': json['height'] == null ? undefined : json['height'],
         'id': json['id'] == null ? undefined : json['id'],
-        'plan_type': json['plan_type'] == null ? undefined : GithubComQeeqezApiDbSqlcPlanTypeFromJSON(json['plan_type']),
+        'planType': json['plan_type'] == null ? undefined : GithubComQeeqezApiDbSqlcPlanTypeFromJSON(json['plan_type']),
         'poster': json['poster'] == null ? undefined : ImageFromJSON(json['poster']),
         'width': json['width'] == null ? undefined : json['width'],
     };
@@ -169,7 +169,7 @@ export function VideoToJSONTyped(value?: Video | null, ignoreDiscriminator: bool
         'hdr': value['hdr'],
         'height': value['height'],
         'id': value['id'],
-        'plan_type': GithubComQeeqezApiDbSqlcPlanTypeToJSON(value['plan_type']),
+        'plan_type': GithubComQeeqezApiDbSqlcPlanTypeToJSON(value['planType']),
         'poster': ImageToJSON(value['poster']),
         'width': value['width'],
     };

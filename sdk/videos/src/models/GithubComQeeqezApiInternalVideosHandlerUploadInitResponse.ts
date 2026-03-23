@@ -24,31 +24,31 @@ export interface GithubComQeeqezApiInternalVideosHandlerUploadInitResponse {
      * @type {string}
      * @memberof GithubComQeeqezApiInternalVideosHandlerUploadInitResponse
      */
-    poster_id?: string;
+    posterId?: string;
     /**
      * 
      * @type {string}
      * @memberof GithubComQeeqezApiInternalVideosHandlerUploadInitResponse
      */
-    poster_presigned_url?: string;
+    posterPresignedUrl?: string;
     /**
      * 
      * @type {number}
      * @memberof GithubComQeeqezApiInternalVideosHandlerUploadInitResponse
      */
-    upload_expires?: number;
+    uploadExpires?: number;
     /**
      * 
      * @type {string}
      * @memberof GithubComQeeqezApiInternalVideosHandlerUploadInitResponse
      */
-    video_id?: string;
+    videoId?: string;
     /**
      * 
      * @type {string}
      * @memberof GithubComQeeqezApiInternalVideosHandlerUploadInitResponse
      */
-    video_presigned_url?: string;
+    videoPresignedUrl?: string;
 }
 
 /**
@@ -68,11 +68,11 @@ export function GithubComQeeqezApiInternalVideosHandlerUploadInitResponseFromJSO
     }
     return {
         
-        'poster_id': json['poster_id'] == null ? undefined : json['poster_id'],
-        'poster_presigned_url': json['poster_presigned_url'] == null ? undefined : json['poster_presigned_url'],
-        'upload_expires': json['upload_expires'] == null ? undefined : json['upload_expires'],
-        'video_id': json['video_id'] == null ? undefined : json['video_id'],
-        'video_presigned_url': json['video_presigned_url'] == null ? undefined : json['video_presigned_url'],
+        'posterId': json['poster_id'] == null ? undefined : json['poster_id'],
+        'posterPresignedUrl': json['poster_presigned_url'] == null ? undefined : json['poster_presigned_url'],
+        'uploadExpires': json['upload_expires'] == null ? undefined : json['upload_expires'],
+        'videoId': json['video_id'] == null ? undefined : json['video_id'],
+        'videoPresignedUrl': json['video_presigned_url'] == null ? undefined : json['video_presigned_url'],
     };
 }
 
@@ -87,11 +87,11 @@ export function GithubComQeeqezApiInternalVideosHandlerUploadInitResponseToJSONT
 
     return {
         
-        'poster_id': value['poster_id'],
-        'poster_presigned_url': value['poster_presigned_url'],
-        'upload_expires': value['upload_expires'],
-        'video_id': value['video_id'],
-        'video_presigned_url': value['video_presigned_url'],
+        'poster_id': value['posterId'],
+        'poster_presigned_url': value['posterPresignedUrl'],
+        'upload_expires': value['uploadExpires'],
+        'video_id': value['videoId'],
+        'video_presigned_url': value['videoPresignedUrl'],
     };
 }
 

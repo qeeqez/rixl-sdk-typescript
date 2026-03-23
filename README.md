@@ -1,41 +1,32 @@
-# RIXL TypeScript SDKs
+# RIXL TypeScript SDK
 
-This repository contains the TypeScript SDK split by service instead of one flat generated client.
+The RIXL TypeScript SDK provides full type safety and a modern developer experience for integrating RIXL services into your web and server-side applications.
 
-## Layout
+## Services
 
-- `sdk/feeds` -> package `@rixl/sdk-typescript-feeds`
-- `sdk/videos` -> package `@rixl/sdk-typescript-videos`
-- `sdk/images` -> package `@rixl/sdk-typescript-images`
+The SDK is organized into standalone service packages:
 
-Each service folder is a standalone generated package with its own `package.json`, `tsconfig.json`, and `src` directory.
+- **@rixl/sdk-typescript-feeds**: Content and user feed management.
+- **@rixl/sdk-typescript-videos**: End-to-end video lifecycle management.
+- **@rixl/sdk-typescript-images**: High-speed image uploads and transformations.
 
-## Build Example
+## Installation
 
-Build the videos SDK:
+Install the desired packages using npm or yarn:
 
-```sh
-cd sdk/videos
-npm install
-npm run build
+```bash
+npm install @rixl/sdk-typescript-feeds @rixl/sdk-typescript-videos @rixl/sdk-typescript-images
 ```
 
-## Regenerate
+## Example Usage
 
-Generate all services:
+```typescript
+import { FeedsApi } from '@rixl/sdk-typescript-feeds';
 
-```sh
-./scripts/generate.sh
+const feeds = new FeedsApi();
+// const res = await feeds.getFeed();
 ```
 
-Generate one service:
+## Support
 
-```sh
-./scripts/generate.sh --service videos
-```
-
-Regenerate from a fresh OpenAPI file:
-
-```sh
-./scripts/generate.sh --spec /path/to/public.swagger.json --service images
-```
+Please report any issues via the GitHub Issue tracker.

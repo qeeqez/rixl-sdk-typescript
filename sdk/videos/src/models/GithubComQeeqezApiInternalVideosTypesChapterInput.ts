@@ -24,7 +24,7 @@ export interface GithubComQeeqezApiInternalVideosTypesChapterInput {
      * @type {number}
      * @memberof GithubComQeeqezApiInternalVideosTypesChapterInput
      */
-    start_time_sec?: number;
+    startTimeSec?: number;
     /**
      * 
      * @type {string}
@@ -50,7 +50,7 @@ export function GithubComQeeqezApiInternalVideosTypesChapterInputFromJSONTyped(j
     }
     return {
         
-        'start_time_sec': json['start_time_sec'] == null ? undefined : json['start_time_sec'],
+        'startTimeSec': json['start_time_sec'] == null ? undefined : json['start_time_sec'],
         'title': json['title'] == null ? undefined : json['title'],
     };
 }
@@ -66,7 +66,7 @@ export function GithubComQeeqezApiInternalVideosTypesChapterInputToJSONTyped(val
 
     return {
         
-        'start_time_sec': value['start_time_sec'],
+        'start_time_sec': value['startTimeSec'],
         'title': value['title'],
     };
 }

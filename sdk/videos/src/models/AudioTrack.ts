@@ -24,7 +24,7 @@ export interface AudioTrack {
      * @type {string}
      * @memberof AudioTrack
      */
-    created_at?: string;
+    createdAt?: string;
     /**
      * 
      * @type {string}
@@ -48,7 +48,7 @@ export interface AudioTrack {
      * @type {string}
      * @memberof AudioTrack
      */
-    language_code?: string;
+    languageCode?: string;
     /**
      * 
      * @type {string}
@@ -72,7 +72,7 @@ export interface AudioTrack {
      * @type {string}
      * @memberof AudioTrack
      */
-    video_id?: string;
+    videoId?: string;
 }
 
 /**
@@ -92,15 +92,15 @@ export function AudioTrackFromJSONTyped(json: any, ignoreDiscriminator: boolean)
     }
     return {
         
-        'created_at': json['created_at'] == null ? undefined : json['created_at'],
+        'createdAt': json['created_at'] == null ? undefined : json['created_at'],
         'format': json['format'] == null ? undefined : json['format'],
         'id': json['id'] == null ? undefined : json['id'],
         'label': json['label'] == null ? undefined : json['label'],
-        'language_code': json['language_code'] == null ? undefined : json['language_code'],
+        'languageCode': json['language_code'] == null ? undefined : json['language_code'],
         'name': json['name'] == null ? undefined : json['name'],
         'size': json['size'] == null ? undefined : json['size'],
         'url': json['url'] == null ? undefined : json['url'],
-        'video_id': json['video_id'] == null ? undefined : json['video_id'],
+        'videoId': json['video_id'] == null ? undefined : json['video_id'],
     };
 }
 
@@ -115,15 +115,15 @@ export function AudioTrackToJSONTyped(value?: AudioTrack | null, ignoreDiscrimin
 
     return {
         
-        'created_at': value['created_at'],
+        'created_at': value['createdAt'],
         'format': value['format'],
         'id': value['id'],
         'label': value['label'],
-        'language_code': value['language_code'],
+        'language_code': value['languageCode'],
         'name': value['name'],
         'size': value['size'],
         'url': value['url'],
-        'video_id': value['video_id'],
+        'video_id': value['videoId'],
     };
 }
 

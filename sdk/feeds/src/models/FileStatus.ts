@@ -12,19 +12,20 @@
  * Do not edit the class manually.
  */
 
+
 /**
  * 
  * @export
- * @enum {string}
  */
-export enum FileStatus {
-    FileStatusUploading = 'uploading',
-    FileStatusUploaded = 'uploaded',
-    FileStatusProcessing = 'processing',
-    FileStatusPreparing = 'preparing',
-    FileStatusReady = 'ready',
-    FileStatusError = 'error'
-}
+export const FileStatus = {
+    FileStatusUploading: 'uploading',
+    FileStatusUploaded: 'uploaded',
+    FileStatusProcessing: 'processing',
+    FileStatusPreparing: 'preparing',
+    FileStatusReady: 'ready',
+    FileStatusError: 'error'
+} as const;
+export type FileStatus = typeof FileStatus[keyof typeof FileStatus];
 
 
 export function instanceOfFileStatus(value: any): boolean {

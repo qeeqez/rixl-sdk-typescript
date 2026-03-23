@@ -12,17 +12,18 @@
  * Do not edit the class manually.
  */
 
+
 /**
  * 
  * @export
- * @enum {string}
  */
-export enum GithubComQeeqezApiDbSqlcPlanType {
-    PlanTypeFree = 'free',
-    PlanTypePro = 'pro',
-    PlanTypeCustom = 'custom',
-    PlanTypePayAsYouGo = 'pay_as_you_go'
-}
+export const GithubComQeeqezApiDbSqlcPlanType = {
+    PlanTypeFree: 'free',
+    PlanTypePro: 'pro',
+    PlanTypeCustom: 'custom',
+    PlanTypePayAsYouGo: 'pay_as_you_go'
+} as const;
+export type GithubComQeeqezApiDbSqlcPlanType = typeof GithubComQeeqezApiDbSqlcPlanType[keyof typeof GithubComQeeqezApiDbSqlcPlanType];
 
 
 export function instanceOfGithubComQeeqezApiDbSqlcPlanType(value: any): boolean {

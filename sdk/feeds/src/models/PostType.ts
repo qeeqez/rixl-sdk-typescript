@@ -12,15 +12,16 @@
  * Do not edit the class manually.
  */
 
+
 /**
  * 
  * @export
- * @enum {string}
  */
-export enum PostType {
-    PostTypeImage = 'image',
-    PostTypeVideo = 'video'
-}
+export const PostType = {
+    PostTypeImage: 'image',
+    PostTypeVideo: 'video'
+} as const;
+export type PostType = typeof PostType[keyof typeof PostType];
 
 
 export function instanceOfPostType(value: any): boolean {

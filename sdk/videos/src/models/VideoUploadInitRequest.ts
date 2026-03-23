@@ -32,19 +32,19 @@ export interface VideoUploadInitRequest {
      * @type {string}
      * @memberof VideoUploadInitRequest
      */
-    file_name: string;
+    fileName: string;
     /**
      * 
      * @type {string}
      * @memberof VideoUploadInitRequest
      */
-    image_format?: string;
+    imageFormat?: string;
     /**
      * 
      * @type {GithubComQeeqezApiDbSqlcVideoQuality}
      * @memberof VideoUploadInitRequest
      */
-    video_quality?: GithubComQeeqezApiDbSqlcVideoQuality;
+    videoQuality?: GithubComQeeqezApiDbSqlcVideoQuality;
 }
 
 
@@ -53,7 +53,7 @@ export interface VideoUploadInitRequest {
  * Check if a given object implements the VideoUploadInitRequest interface.
  */
 export function instanceOfVideoUploadInitRequest(value: object): value is VideoUploadInitRequest {
-    if (!('file_name' in value) || value['file_name'] === undefined) return false;
+    if (!('fileName' in value) || value['fileName'] === undefined) return false;
     return true;
 }
 
@@ -67,9 +67,9 @@ export function VideoUploadInitRequestFromJSONTyped(json: any, ignoreDiscriminat
     }
     return {
         
-        'file_name': json['file_name'],
-        'image_format': json['image_format'] == null ? undefined : json['image_format'],
-        'video_quality': json['video_quality'] == null ? undefined : GithubComQeeqezApiDbSqlcVideoQualityFromJSON(json['video_quality']),
+        'fileName': json['file_name'],
+        'imageFormat': json['image_format'] == null ? undefined : json['image_format'],
+        'videoQuality': json['video_quality'] == null ? undefined : GithubComQeeqezApiDbSqlcVideoQualityFromJSON(json['video_quality']),
     };
 }
 
@@ -84,9 +84,9 @@ export function VideoUploadInitRequestToJSONTyped(value?: VideoUploadInitRequest
 
     return {
         
-        'file_name': value['file_name'],
-        'image_format': value['image_format'],
-        'video_quality': GithubComQeeqezApiDbSqlcVideoQualityToJSON(value['video_quality']),
+        'file_name': value['fileName'],
+        'image_format': value['imageFormat'],
+        'video_quality': GithubComQeeqezApiDbSqlcVideoQualityToJSON(value['videoQuality']),
     };
 }
 
