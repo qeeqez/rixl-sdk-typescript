@@ -638,7 +638,7 @@ export interface VideosApiInterface {
     putVideosVideoIdThumbnailRequestOpts(requestParameters: PutVideosVideoIdThumbnailRequest): Promise<runtime.RequestOpts>;
 
     /**
-     * Update the thumbnail image for an existing video
+     * Update the thumbnail image for an existing video using API key authentication
      * @summary Update video thumbnail
      * @param {string} videoId Video ID
      * @param {Blob} thumbnail Thumbnail image file (max 5MB, image/_*)
@@ -649,7 +649,7 @@ export interface VideosApiInterface {
     putVideosVideoIdThumbnailRaw(requestParameters: PutVideosVideoIdThumbnailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Video>>;
 
     /**
-     * Update the thumbnail image for an existing video
+     * Update the thumbnail image for an existing video using API key authentication
      * Update video thumbnail
      */
     putVideosVideoIdThumbnail(requestParameters: PutVideosVideoIdThumbnailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Video>;
@@ -1826,6 +1826,10 @@ export class VideosApi extends runtime.BaseAPI implements VideosApiInterface {
 
         const headerParameters: runtime.HTTPHeaders = {};
 
+        if (this.configuration && this.configuration.apiKey) {
+            headerParameters["X-API-Key"] = await this.configuration.apiKey("X-API-Key"); // ApiKeyAuth authentication
+        }
+
         const consumes: runtime.Consume[] = [
             { contentType: 'multipart/form-data' },
         ];
@@ -1860,7 +1864,7 @@ export class VideosApi extends runtime.BaseAPI implements VideosApiInterface {
     }
 
     /**
-     * Update the thumbnail image for an existing video
+     * Update the thumbnail image for an existing video using API key authentication
      * Update video thumbnail
      */
     async putVideosVideoIdThumbnailRaw(requestParameters: PutVideosVideoIdThumbnailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Video>> {
@@ -1871,7 +1875,7 @@ export class VideosApi extends runtime.BaseAPI implements VideosApiInterface {
     }
 
     /**
-     * Update the thumbnail image for an existing video
+     * Update the thumbnail image for an existing video using API key authentication
      * Update video thumbnail
      */
     async putVideosVideoIdThumbnail(requestParameters: PutVideosVideoIdThumbnailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Video> {
