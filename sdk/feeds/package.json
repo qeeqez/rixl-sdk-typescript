@@ -1,0 +1,37 @@
+{
+  "name": "@rixl/sdk-typescript-feeds",
+  "version": "2.0.0",
+  "description": "RIXL public TypeScript SDK for feeds generated from the public OpenAPI spec.",
+  "author": "Rixl Inc.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qeeqez/rixl-sdk-typescript.git"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "module": "./dist/esm/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig.esm.json",
+    "prepare": "npm run build"
+  },
+  "devDependencies": {
+    "typescript": "^4.0 || ^5.0"
+  },
+  "homepage": "https://rixl.com",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "rixl",
+    "sdk",
+    "api",
+    "openapi",
+    "typescript",
+    "feeds"
+  ]
+}
