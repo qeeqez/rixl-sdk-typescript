@@ -1,5 +1,5 @@
 {
-  "name": "@rixl/api-sdk",
+  "name": "@rixl/sdk-typescript",
   "version": "2.0.0",
   "description": "RIXL public API SDK generated from the public OpenAPI spec.",
   "author": "Rixl Inc.",
