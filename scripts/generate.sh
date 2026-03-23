@@ -8,6 +8,8 @@ INPUT_SPEC="${ROOT_DIR}/openapi/public.swagger.json"
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "${TMP_DIR}"' EXIT
 
+cd "${ROOT_DIR}"
+
 require_command() {
 	local command="$1"
 	if ! command -v "${command}" >/dev/null 2>&1; then
@@ -38,7 +40,7 @@ if [[ ! -f "${INPUT_SPEC}" ]]; then
 fi
 
 npx -y @openapitools/openapi-generator-cli generate \
-	-g typescript \
+	-g typescript-fetch \
 	-i "${INPUT_SPEC}" \
 	-o "${TMP_DIR}" \
 	--global-property apiTests=false,modelTests=false \
@@ -46,7 +48,7 @@ npx -y @openapitools/openapi-generator-cli generate \
 
 tmp_package_json="$(mktemp)"
 jq '
-	.name = "@rixl/api-sdk"
+	.name = "@rixl/sdk-typescript"
 	| .description = "RIXL public TypeScript SDK generated from the public OpenAPI spec."
 	| .author = "Rixl Inc."
 	| .homepage = "https://rixl.com"
