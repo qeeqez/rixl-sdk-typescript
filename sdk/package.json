@@ -1,7 +1,7 @@
 {
-  "name": "@rixl/sdk-typescript-images",
+  "name": "@rixl/sdk-typescript",
   "version": "2.0",
-  "description": "OpenAPI client for @rixl/sdk-typescript-images",
+  "description": "OpenAPI client for @rixl/sdk-typescript",
   "author": "OpenAPI-Generator",
   "repository": {
     "type": "git",

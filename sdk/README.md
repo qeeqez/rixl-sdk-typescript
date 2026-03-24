@@ -1,4 +1,4 @@
-# @rixl/sdk-typescript-videos@2.0
+# @rixl/sdk-typescript@2.0
 
 A TypeScript SDK client for the localhost API.
 
@@ -7,7 +7,7 @@ A TypeScript SDK client for the localhost API.
 First, install the SDK from npm.
 
 ```bash
-npm install @rixl/sdk-typescript-videos --save
+npm install @rixl/sdk-typescript --save
 ```
 
 Next, try it out.
@@ -16,31 +16,27 @@ Next, try it out.
 ```ts
 import {
   Configuration,
-  VideosApi,
-} from '@rixl/sdk-typescript-videos';
-import type { VideosGetRequest } from '@rixl/sdk-typescript-videos';
+  FeedsApi,
+} from '@rixl/sdk-typescript';
+import type { FeedsFeedIdCreatorsCreatorIdGetRequest } from '@rixl/sdk-typescript';
 
 async function example() {
-  console.log("🚀 Testing @rixl/sdk-typescript-videos SDK...");
-  const config = new Configuration({ 
-    // To configure API key authorization: ApiKeyAuth
-    apiKey: "YOUR API KEY",
-  });
-  const api = new VideosApi(config);
+  console.log("🚀 Testing @rixl/sdk-typescript SDK...");
+  const api = new FeedsApi();
 
   const body = {
+    // string | Feed ID
+    feedId: F4edRI23XL,
+    // string | Creator ID
+    creatorId: C6rtRI23XL,
     // number | Maximum number of items to return in a single request. <br> **Default:** `25` (optional)
     limit: 25,
     // number | Starting point of the result set. <br>To get page 2 with a limit of 25, set `offset` to `25`. <br> **Default:** `0` (optional)
     offset: 0,
-    // string | Field to sort by (created_at, name, size, updated_at, duration) (optional)
-    sort: created_at,
-    // string | Sort order (asc, desc) (optional)
-    order: desc,
-  } satisfies VideosGetRequest;
+  } satisfies FeedsFeedIdCreatorsCreatorIdGetRequest;
 
   try {
-    const data = await api.videosGet(body);
+    const data = await api.feedsFeedIdCreatorsCreatorIdGet(body);
     console.log(data);
   } catch (error) {
     console.error(error);
@@ -60,6 +56,14 @@ All URIs are relative to *http://localhost*
 
 | Class | Method | HTTP request | Description
 | ----- | ------ | ------------ | -------------
+*FeedsApi* | [**feedsFeedIdCreatorsCreatorIdGet**](docs/FeedsApi.md#feedsfeedidcreatorscreatoridget) | **GET** /feeds/{feedId}/creators/{creatorId} | List posts by creator
+*FeedsApi* | [**feedsFeedIdGet**](docs/FeedsApi.md#feedsfeedidget) | **GET** /feeds/{feedId} | List posts in a feed
+*FeedsApi* | [**feedsFeedIdPostIdGet**](docs/FeedsApi.md#feedsfeedidpostidget) | **GET** /feeds/{feedId}/{postId} | Get a post
+*ImagesApi* | [**imagesGet**](docs/ImagesApi.md#imagesget) | **GET** /images | List images for a project
+*ImagesApi* | [**imagesImageIdDelete**](docs/ImagesApi.md#imagesimageiddelete) | **DELETE** /images/{imageId} | Delete image
+*ImagesApi* | [**imagesImageIdGet**](docs/ImagesApi.md#imagesimageidget) | **GET** /images/{imageId} | Get image
+*ImagesApi* | [**imagesUploadCompletePost**](docs/ImagesApi.md#imagesuploadcompletepostoperation) | **POST** /images/upload/complete | Upload: Mark as complete
+*ImagesApi* | [**imagesUploadInitPost**](docs/ImagesApi.md#imagesuploadinitpostoperation) | **POST** /images/upload/init | Upload: Init
 *VideosApi* | [**videosGet**](docs/VideosApi.md#videosget) | **GET** /videos | List videos for a project
 *VideosApi* | [**videosLanguagesGet**](docs/VideosApi.md#videoslanguagesget) | **GET** /videos/languages | List available subtitle languages
 *VideosApi* | [**videosUploadCompletePost**](docs/VideosApi.md#videosuploadcompletepostoperation) | **POST** /videos/upload/complete | Upload: Mark as complete
@@ -93,11 +97,21 @@ All URIs are relative to *http://localhost*
 - [GithubComQeeqezApiInternalVideosHandlerUploadCompleteRequest](docs/GithubComQeeqezApiInternalVideosHandlerUploadCompleteRequest.md)
 - [GithubComQeeqezApiInternalVideosHandlerUploadInitResponse](docs/GithubComQeeqezApiInternalVideosHandlerUploadInitResponse.md)
 - [GithubComQeeqezApiInternalVideosTypesChapterInput](docs/GithubComQeeqezApiInternalVideosTypesChapterInput.md)
+- [GithubComQeeqezApiInternalVideosVideoResponse](docs/GithubComQeeqezApiInternalVideosVideoResponse.md)
 - [Image](docs/Image.md)
+- [ImagesUploadCompletePostRequest](docs/ImagesUploadCompletePostRequest.md)
+- [ImagesUploadInitPostRequest](docs/ImagesUploadInitPostRequest.md)
+- [InternalImagesHandlerCompleteRequest](docs/InternalImagesHandlerCompleteRequest.md)
+- [InternalImagesHandlerInitResponse](docs/InternalImagesHandlerInitResponse.md)
+- [InternalImagesHandlerUploadInitRequest](docs/InternalImagesHandlerUploadInitRequest.md)
 - [InternalVideosHandlerSubtitlesLanguageResponse](docs/InternalVideosHandlerSubtitlesLanguageResponse.md)
 - [ModelFile](docs/ModelFile.md)
+- [PaginationPaginatedResponseImage](docs/PaginationPaginatedResponseImage.md)
+- [PaginationPaginatedResponsePost](docs/PaginationPaginatedResponsePost.md)
 - [PaginationPaginatedResponseVideo](docs/PaginationPaginatedResponseVideo.md)
 - [PaginationPagination](docs/PaginationPagination.md)
+- [Post](docs/Post.md)
+- [PostType](docs/PostType.md)
 - [Subtitle](docs/Subtitle.md)
 - [SubtitleDelete](docs/SubtitleDelete.md)
 - [UpdateChaptersRequest](docs/UpdateChaptersRequest.md)
