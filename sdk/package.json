@@ -1,19 +1,24 @@
 {
   "name": "@rixl/sdk-typescript",
-  "version": "2.0",
-  "description": "OpenAPI client for @rixl/sdk-typescript",
-  "author": "OpenAPI-Generator",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
-  },
+  "version": "0.0.0-kiota",
+  "description": "Kiota-generated TypeScript SDK for RIXL.",
+  "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc",
-    "prepare": "npm run build"
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@microsoft/kiota-abstractions": "1.0.0-preview.100",
+    "@microsoft/kiota-serialization-form": "1.0.0-preview.100",
+    "@microsoft/kiota-serialization-json": "1.0.0-preview.100",
+    "@microsoft/kiota-serialization-multipart": "1.0.0-preview.100",
+    "@microsoft/kiota-serialization-text": "1.0.0-preview.100"
   },
   "devDependencies": {
-    "typescript": "^4.0 || ^5.0"
+    "typescript": "^6.0.2"
   }
 }
